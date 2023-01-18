@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Web Console</title>
+    </head>
+
+    <body>
+        <h1>Web Console</h1>
+        <p>Web Console is a web-based dashboard for your Minecraft server.</p>
+        <p>It is currently in development, and is not yet ready for use.</p>
+
+        <button onclick="send(1)">Send 1</button>
+        <button onclick="send('balls')">Send balls</button>
+    </body>
+
+    <script>
+        function send(data) {
+            // get current url
+            const  url = window.location.href;
+            fetch(`${url}send?${data}`);
+        }
+    </script>
+
+</html>

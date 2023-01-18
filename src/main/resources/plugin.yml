@@ -1,0 +1,10 @@
+name: WebDash
+version: '${project.version}'
+main: com.simondmc.webdash.WebDash
+api-version: 1.19
+authors: [ SimonDMC ]
+description: Web Dashboard Test
+website: simondmc.com
+
+commands:
+  bind:
