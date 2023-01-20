@@ -8,10 +8,10 @@ import java.net.InetSocketAddress;
 
 public class WebServer {
     public HttpServer create() throws IOException {
-        int port = 26666;
+        int port = WebDash.plugin.getConfig().getInt("port");
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         WebDash.logger.info("Creating server at port " + port);
-        server.createContext("/", new MainDashboard(port));
+        server.createContext("/", new MainDashboard());
         server.createContext("/send", new SendRoute());
         server.setExecutor(null);
         return server;

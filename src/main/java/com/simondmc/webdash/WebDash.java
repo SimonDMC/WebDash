@@ -30,6 +30,12 @@ public final class WebDash extends JavaPlugin {
 
         // register commands
         getCommand("bind").setExecutor(new BindCommand());
+
+        // copy HTML file into plugin directory
+        saveResource("index.html", true);
+
+        // copy config file into plugin directory
+        saveDefaultConfig();
     }
 
     @Override
