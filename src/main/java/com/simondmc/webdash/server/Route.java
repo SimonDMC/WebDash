@@ -15,7 +15,7 @@ public class Route {
         // 3. all letters are converted to lowercase
         // 4. if id already exists (RouteHandler.get(id) != null), add an underscore to the end
         this.id = name.replaceAll(" ", "_").replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        if (RouteHandler.getRoute(id) != null) {
+        while (RouteHandler.getRoute(id) != null) {
             this.id += "_";
         }
     }
