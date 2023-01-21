@@ -4,3 +4,4 @@
 # Default: 26666
 # IMPORTANT: This port must be open on your firewall
 port: 26666
+# run `/webdash restart` to apply changes

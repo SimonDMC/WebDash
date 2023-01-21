@@ -9,21 +9,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SendRoute implements HttpHandler {
-
-    private static final Map<String, String> routes = new HashMap<>();
-
-    public static void addRoute(String key, String command) {
-        routes.put(key, command);
-    }
-
-    public static Map<String, String> getRoutes() {
-        return routes;
-    }
 
     @Override
     public void handle(HttpExchange he) throws IOException {
@@ -31,22 +19,21 @@ public class SendRoute implements HttpHandler {
         URI requestedUri = he.getRequestURI();
         String query = requestedUri.getRawQuery();
         // parse query
-        List<String> params = new ArrayList<String>(List.of(query.split("&")));
-        WebDash.logger.info("Query: " + query);
+        List<String> params = new ArrayList<>(List.of(query.split("&")));
 
-        for (String key : params) {
-            if (routes.containsKey(key)) {
+        String response = "Send successful!";
+
+        for (String id : params) {
+            if (RouteHandler.getRoute(id) != null) {
                 // run sync
-                WebDash.plugin.getServer().getScheduler().scheduleSyncDelayedTask(WebDash.plugin, () -> {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), routes.get(key));
-                });
+                WebDash.plugin.getServer().getScheduler().scheduleSyncDelayedTask(WebDash.plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), RouteHandler.getRoute(id).getCommand()));
             } else {
-                WebDash.logger.warning("No route found for key: " + key);
+                WebDash.logger.warning("No route found for id: " + id);
+                response = "No route found for id: " + id;
             }
         }
 
         // send response
-        String response = "success";
         he.sendResponseHeaders(200, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());

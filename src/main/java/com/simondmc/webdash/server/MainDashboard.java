@@ -13,8 +13,8 @@ public class MainDashboard implements HttpHandler {
 
     private String getButtons() {
         StringBuilder sb = new StringBuilder();
-        for (String key : SendRoute.getRoutes().keySet()) {
-            sb.append("<button onclick=\"send('").append(key).append("')\">").append(key).append("</button>");
+        for (String id : RouteHandler.getRoutes().stream().map(Route::getId).toList()) {
+            sb.append("<button onclick=\"send('").append(id).append("')\">").append(id).append("</button>");
         }
         return sb.toString();
     }

@@ -7,4 +7,5 @@ description: Web Dashboard Test
 website: simondmc.com
 
 commands:
-  bind:
+  webdash:
+  wd:

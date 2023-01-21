@@ -16,8 +16,8 @@
     <script>
         function send(data) {
             // get current url
-            const  url = window.location.href;
-            fetch(`${url}send?${data}`);
+            const url = window.location.href;
+            fetch(url + "send?" + data);
         }
     </script>
 

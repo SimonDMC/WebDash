@@ -1,6 +1,6 @@
 package com.simondmc.webdash;
 
-import com.simondmc.webdash.command.BindCommand;
+import com.simondmc.webdash.command.WebDashCommand;
 import com.simondmc.webdash.server.WebServer;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,21 +15,14 @@ public final class WebDash extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         plugin = this;
         logger = getLogger();
 
         // start web server
-        try {
-            server = new WebServer().create();
-            server.start();
-            logger.info("Server started");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        WebServer.start();
 
         // register commands
-        getCommand("bind").setExecutor(new BindCommand());
+        getCommand("webdash").setExecutor(new WebDashCommand());
 
         // copy HTML file into plugin directory
         saveResource("index.html", true);
@@ -40,8 +33,6 @@ public final class WebDash extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
-        logger.info("Stopping the server!");
-        server.stop(0);
+        WebServer.stop();
     }
 }
