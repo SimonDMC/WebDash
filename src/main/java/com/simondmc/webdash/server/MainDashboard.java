@@ -4,10 +4,10 @@ import com.simondmc.webdash.WebDash;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class MainDashboard implements HttpHandler {
 
@@ -21,26 +21,21 @@ public class MainDashboard implements HttpHandler {
 
     @Override
     public void handle(HttpExchange he) throws IOException {
-        // send html file
-        String path = WebDash.plugin.getDataFolder().getAbsolutePath() + "/index.html";
-        String html;
-        try {
-            html = new String(Files.readAllBytes(Paths.get(path)));
-        } catch (IOException e) {
-            // file not found
-            e.printStackTrace();
-            WebDash.logger.severe("Could not read file: " + path);
-            String response = "<h1>The dashboard file doesn't exist! Please check plugins/WebDash/index.html</h1>";
-            he.sendResponseHeaders(200, response.length());
-            OutputStream os = he.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
-            return;
+
+        String path = he.getRequestURI().getPath();
+        // try to get file from resources/dash, if not found, use resources/dash/index.html
+        if (path.equals("/")) {
+            path = "/index.html";
         }
-        html = html.replace("%buttons%", getButtons());
-        he.sendResponseHeaders(200, html.length());
+        InputStream is = getClass().getClassLoader().getResourceAsStream("dash" + path);
+        if (is == null) {
+            is = getClass().getClassLoader().getResourceAsStream("dash/index.html");
+        }
+        String fileData = new String(is.readAllBytes());
+        fileData = fileData.replace("%buttons%", getButtons());
+        he.sendResponseHeaders(200, fileData.getBytes().length);
         OutputStream os = he.getResponseBody();
-        os.write(html.getBytes());
+        os.write(fileData.getBytes());
         os.close();
     }
 }

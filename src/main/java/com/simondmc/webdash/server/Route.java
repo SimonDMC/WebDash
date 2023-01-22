@@ -31,4 +31,8 @@ public class Route {
     public String getId() {
         return id;
     }
+
+    public String toJson() {
+        return "{\"name\": \"" + name + "\", \"command\": \"/" + command + "\", \"id\": \"" + id + "\", \"color\": \"#5781af\", \"index\": 0}";
+    }
 }

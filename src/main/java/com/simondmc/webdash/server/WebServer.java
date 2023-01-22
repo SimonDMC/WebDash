@@ -28,6 +28,7 @@ public class WebServer {
             WebDash.logger.info("Creating server at port " + port);
             server.createContext("/", new MainDashboard());
             server.createContext("/send", new SendRoute());
+            server.createContext("/get", new GetRoute());
             server.setExecutor(null);
             server.start();
             running = true;
