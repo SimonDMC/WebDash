@@ -3,12 +3,14 @@ package com.simondmc.webdash.command;
 import com.simondmc.webdash.server.Route;
 import com.simondmc.webdash.server.RouteHandler;
 import com.simondmc.webdash.server.WebServer;
+import com.simondmc.webdash.util.PlayerUtil;
 import com.simondmc.webdash.util.StringUtil;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -76,9 +78,13 @@ public class WebDashCommand implements CommandExecutor {
                     sender.sendMessage("§cServer is not running. Run §e/webdash restart§c and check the console to see what went wrong.");
                     return true;
                 }
-                TextComponent message = new TextComponent("§aDashboard Link: §e" + WebServer.getLink());
-                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, WebServer.getLink()));
-                sender.spigot().sendMessage(message);
+                String link = WebServer.getLink();
+                String message = "§aDashboard Link: §e" + link;
+                if (sender instanceof Player) {
+                    PlayerUtil.sendClickableMessage((Player) sender, message, link);
+                } else {
+                    sender.sendMessage(message);
+                }
                 return true;
             }
 
@@ -89,7 +95,13 @@ public class WebDashCommand implements CommandExecutor {
                 }
                 boolean success = WebServer.start();
                 if (success) {
-                    sender.sendMessage("§aServer restarted successfully at §e" + WebServer.getLink() + "§a.");
+                    String link = WebServer.getLink();
+                    String message = "§aServer restarted successfully at §e" + link + "§a.";
+                    if (sender instanceof Player) {
+                        PlayerUtil.sendClickableMessage((Player) sender, message, link);
+                    } else {
+                        sender.sendMessage(message);
+                    }
                 } else {
                     sender.sendMessage("§cServer failed to start. Check the console for more information.");
                 }
