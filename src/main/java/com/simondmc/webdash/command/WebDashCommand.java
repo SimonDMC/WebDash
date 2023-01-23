@@ -35,6 +35,7 @@ public class WebDashCommand implements CommandExecutor {
                 String command = StringUtil.unformatCommand(args, 2);
                 sender.sendMessage("§aAdded button §e" + name + "§a with command §b/" + command + "§a.");
                 RouteHandler.addRoute(new Route(name, command));
+                return true;
             }
 
             /* /webdash remove <id> */
@@ -51,6 +52,7 @@ public class WebDashCommand implements CommandExecutor {
                 } else {
                     sender.sendMessage("§cButton with id §e" + id + "§c does not exist.");
                 }
+                return true;
             }
 
             /* /webdash list */
@@ -64,6 +66,7 @@ public class WebDashCommand implements CommandExecutor {
                 for (Route route : routes) {
                     sender.sendMessage("§e" + route.getName() + "§a: §b/" + route.getCommand());
                 }
+                return true;
             }
 
             /* /webdash link */
@@ -76,6 +79,7 @@ public class WebDashCommand implements CommandExecutor {
                 TextComponent message = new TextComponent("§aDashboard Link: §e" + WebServer.getLink());
                 message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, WebServer.getLink()));
                 sender.spigot().sendMessage(message);
+                return true;
             }
 
             /* /webdash restart */
@@ -89,7 +93,11 @@ public class WebDashCommand implements CommandExecutor {
                 } else {
                     sender.sendMessage("§cServer failed to start. Check the console for more information.");
                 }
+                return true;
             }
+
+            // base help message
+            sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, on, off");
             return true;
         }
         return false;
