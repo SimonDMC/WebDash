@@ -1,5 +1,7 @@
 package com.simondmc.webdash.server;
 
+import com.simondmc.webdash.util.StringUtil;
+
 public class Route {
 
     private final String name;
@@ -33,6 +35,8 @@ public class Route {
     }
 
     public String toJson() {
+        // make sure all quotes are escaped exactly once
+        String command = StringUtil.escapeQuotes(StringUtil.unescapeQuotes(this.command));
         return "{\"name\": \"" + name + "\", \"command\": \"/" + command + "\", \"id\": \"" + id + "\", \"color\": \"#5781af\", \"index\": 0}";
     }
 }

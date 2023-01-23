@@ -10,6 +10,8 @@ public class StringUtil {
      */
     public static String unformatCommand(String[] args, int startAt) {
         String cmd = joinStringArray(args, " ", startAt);
+
+        // remove leading slash
         if (cmd.charAt(0) == '/') {
             cmd = cmd.substring(1);
         }
@@ -32,5 +34,23 @@ public class StringUtil {
             }
         }
         return builder.toString();
+    }
+
+    /**
+     * Unescapes every quote in a string.
+     * @param string The string to change every `\"` to `"` in.
+     * @return The unescaped string.
+     */
+    public static String unescapeQuotes(String string) {
+        return string.replaceAll("\\\\\"", "\"");
+    }
+
+    /**
+     * Escapes every quote in a string.
+     * @param string The string to change every `"` to `\"` in.
+     * @return The escaped string.
+     */
+    public static String escapeQuotes(String string) {
+        return string.replaceAll("\"", "\\\\\"");
     }
 }
