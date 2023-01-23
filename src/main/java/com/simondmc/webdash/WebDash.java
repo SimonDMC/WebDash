@@ -2,10 +2,10 @@ package com.simondmc.webdash;
 
 import com.simondmc.webdash.command.WebDashCommand;
 import com.simondmc.webdash.command.WebDashTabCompleter;
+import com.simondmc.webdash.config.RoutesConfig;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.logging.Logger;
 
 public final class WebDash extends JavaPlugin {
@@ -26,6 +26,9 @@ public final class WebDash extends JavaPlugin {
 
         // copy config file into plugin directory
         saveDefaultConfig();
+
+        // init routes config
+        RoutesConfig.init();
 
         // start web server
         WebServer.start();

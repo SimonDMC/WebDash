@@ -5,8 +5,6 @@ import com.simondmc.webdash.server.RouteHandler;
 import com.simondmc.webdash.server.WebServer;
 import com.simondmc.webdash.util.PlayerUtil;
 import com.simondmc.webdash.util.StringUtil;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

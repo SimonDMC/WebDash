@@ -1,5 +1,7 @@
 package com.simondmc.webdash.server;
 
+import com.simondmc.webdash.config.RoutesConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class RouteHandler {
 
     public static void addRoute(Route route) {
         routes.add(route);
+        RoutesConfig.saveRoutes();
     }
 
     public static List<Route> getRoutes() {
@@ -26,5 +29,11 @@ public class RouteHandler {
 
     public static void removeRoute(String id) {
         routes.remove(getRoute(id));
+        RoutesConfig.saveRoutes();
+    }
+
+    public static void loadRoutes() {
+        routes.clear();
+        routes.addAll(RoutesConfig.getRoutes());
     }
 }

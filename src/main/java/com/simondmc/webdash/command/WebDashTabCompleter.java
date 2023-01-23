@@ -1,7 +1,7 @@
 package com.simondmc.webdash.command;
 
-import com.simondmc.webdash.server.RouteHandler;
 import com.simondmc.webdash.server.Route;
+import com.simondmc.webdash.server.RouteHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;

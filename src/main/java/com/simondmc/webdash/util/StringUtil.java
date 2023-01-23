@@ -1,5 +1,7 @@
 package com.simondmc.webdash.util;
 
+import com.simondmc.webdash.server.RouteHandler;
+
 public class StringUtil {
     /**
      * Formats a string array into a command without a slash.
@@ -52,5 +54,22 @@ public class StringUtil {
      */
     public static String escapeQuotes(String string) {
         return string.replaceAll("\"", "\\\\\"");
+    }
+
+    /**
+     * Generates an id from a name based on the following criteria:
+     * 1. All spaces are replaced with underscores
+     * 2. All non-alphanumeric characters are removed
+     * 3. All letters are converted to lowercase
+     * 4. If id already exists (RouteHandler.get(id) != null), add an underscore to the end
+     * @param name The name to generate an id from.
+     * @return The generated id.
+     */
+    public static String generateId(String name) {
+        String id = name.replaceAll(" ", "_").replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        while (RouteHandler.getRoute(id) != null) {
+            id += "_";
+        }
+        return id;
     }
 }
