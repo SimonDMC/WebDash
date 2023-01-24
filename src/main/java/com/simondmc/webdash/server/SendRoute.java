@@ -24,6 +24,7 @@ public class SendRoute implements HttpHandler {
         List<String> params = new ArrayList<>(List.of(query.split("&")));
 
         String response = "Send successful!";
+        int status = 200;
 
         for (String id : params) {
             if (RouteHandler.getRoute(id) != null) {
@@ -32,11 +33,13 @@ public class SendRoute implements HttpHandler {
             } else {
                 WebDash.logger.warning("No route found for id: " + id);
                 response = "No route found for id: " + id;
+                status = 404;
             }
         }
 
         // send response
-        he.sendResponseHeaders(200, response.length());
+        if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        he.sendResponseHeaders(status, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());
         os.close();

@@ -9,6 +9,8 @@ import java.net.InetSocketAddress;
 
 public class WebServer {
 
+    public static boolean CORS = false;
+
     private static HttpServer server;
 
     private static boolean running = false;
@@ -29,6 +31,7 @@ public class WebServer {
             server.createContext("/", new MainDashboard());
             server.createContext("/send", new SendRoute());
             server.createContext("/get", new GetRoute());
+            server.createContext("/delete", new DeleteRoute());
             server.setExecutor(null);
             server.start();
             running = true;

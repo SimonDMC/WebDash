@@ -30,6 +30,12 @@ public class RoutesConfig {
         }
 
         public static void saveRoutes() {
+            // wipe existing routes
+            for (String key : Configs.get(CONFIG_NAME).getConfig().getKeys(false)) {
+                Configs.get(CONFIG_NAME).getConfig().set(key, null);
+            }
+
+            // replace routes
             for (Route route : RouteHandler.getRoutes()) {
                 String path = route.getId() + ".";
                 Configs.get(CONFIG_NAME).getConfig().set(path + "name", route.getName());

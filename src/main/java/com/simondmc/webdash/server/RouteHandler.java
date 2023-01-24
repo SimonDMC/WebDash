@@ -27,13 +27,45 @@ public class RouteHandler {
         return null;
     }
 
-    public static void removeRoute(String id) {
-        routes.remove(getRoute(id));
+    // returns true if successful, false if route doesn't exist
+    public static boolean removeRoute(String id) {
+
+        // shift all routes after to be one less
+        Route route = getRoute(id);
+        if (route == null) return false;
+
+        int index = route.getIndex();
+
+        routes.remove(index);
+
+        for (Route routeToShift : getRoutes()) {
+            int indexToShift = routeToShift.getIndex();
+            if (indexToShift > index) {
+                routeToShift.setIndex(indexToShift - 1);
+            }
+        }
+
         RoutesConfig.saveRoutes();
+
+        return true;
     }
 
     public static void loadRoutes() {
         routes.clear();
         routes.addAll(RoutesConfig.getRoutes());
+    }
+
+    public static String getJSON() {
+        // compile JSON from routes
+        StringBuilder json = new StringBuilder("{\"buttons\": [");
+        for (Route route : RouteHandler.getRoutes()) {
+            json.append(route.toJson()).append(",");
+        }
+        // remove trailing comma
+        if (json.charAt(json.length() - 1) == ',') {
+            json.deleteCharAt(json.length() - 1);
+        }
+        json.append("]}");
+        return json.toString();
     }
 }

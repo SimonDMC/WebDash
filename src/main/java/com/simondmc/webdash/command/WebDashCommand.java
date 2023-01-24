@@ -46,10 +46,11 @@ public class WebDashCommand implements CommandExecutor {
                     return true;
                 }
                 String id = args[1];
+
                 Route route = RouteHandler.getRoute(id);
-                if (route != null) {
+
+                if (RouteHandler.removeRoute(id)) {
                     sender.sendMessage("§aRemoved button §e" + route.getName() + "§a.");
-                    RouteHandler.removeRoute(id);
                 } else {
                     sender.sendMessage("§cButton with id §e" + id + "§c does not exist.");
                 }
@@ -60,7 +61,7 @@ public class WebDashCommand implements CommandExecutor {
             if (subcommand.equalsIgnoreCase("list")) {
                 List<Route> routes = RouteHandler.getRoutes();
                 if (routes.size() == 0) {
-                    sender.sendMessage("§cNo buttons have been added yet, use §e/webdash add <name> <command>§c to add one.");
+                    sender.sendMessage("§cNo buttons have been added yet, use §e/webdash add <name> /<command>§c to add one.");
                     return true;
                 }
                 sender.sendMessage("§aListing all buttons:");
