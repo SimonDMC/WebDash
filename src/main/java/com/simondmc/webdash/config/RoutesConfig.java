@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RoutesConfig {
 
-        private static String CONFIG_NAME = "routes.yml";
+        private static final String CONFIG_NAME = "routes.yml";
 
         public static void init() {
             Configs.add(CONFIG_NAME);

@@ -5,6 +5,7 @@ import com.simondmc.webdash.util.StringUtil;
 public class Route {
 
     private String name;
+    // command is stored without a leading slash and added visually
     private String command;
     private String id;
     private String color;
@@ -63,6 +64,6 @@ public class Route {
     public String toJson() {
         // make sure all quotes are escaped exactly once
         String command = StringUtil.escapeQuotes(StringUtil.unescapeQuotes(this.command));
-        return "{\"name\":\"" + name + "\",\"command\":\"" + command + "\",\"id\":\"" + id + "\",\"color\":\"" + color + "\",\"index\":" + index + "}";
+        return "{\"name\":\"" + name + "\",\"command\":\"/" + command + "\",\"id\":\"" + id + "\",\"color\":\"" + color + "\",\"index\":" + index + "}";
     }
 }

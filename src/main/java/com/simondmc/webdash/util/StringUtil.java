@@ -4,23 +4,6 @@ import com.simondmc.webdash.server.RouteHandler;
 
 public class StringUtil {
     /**
-     * Formats a string array into a command without a slash.
-     * @param args The string array to format.
-     * @param startAt The index of the first element to include in the string
-     *                (where the command starts).
-     * @return The formatted string.
-     */
-    public static String unformatCommand(String[] args, int startAt) {
-        String cmd = joinStringArray(args, " ", startAt);
-
-        // remove leading slash
-        if (cmd.charAt(0) == '/') {
-            cmd = cmd.substring(1);
-        }
-        return cmd;
-    }
-
-    /**
      * Joins a string array into a single string.
      * @param array The String array to join.
      * @param delimiter The delimiter to use between each element.
@@ -71,5 +54,19 @@ public class StringUtil {
             id += "_";
         }
         return id;
+    }
+
+    /**
+     * Gets the rest of the string after first occurrence of a delimiter.
+     * @param string The string to get the rest of. If the delimiter is not found, an empty string is returned.
+     * @param delimiter The delimiter to find.
+     * @return The rest of the string after the first occurrence of the delimiter.
+     */
+    public static String getRestOfString(String string, String delimiter) {
+        int index = string.indexOf(delimiter);
+        if (index == -1) {
+            return "";
+        }
+        return string.substring(index + delimiter.length());
     }
 }

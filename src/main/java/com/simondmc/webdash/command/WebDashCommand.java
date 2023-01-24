@@ -25,14 +25,15 @@ public class WebDashCommand implements CommandExecutor {
 
             String subcommand = args[0];
 
-            /* /webdash add <name> <command> */
+            /* /webdash add <name> /<command> */
             if (subcommand.equalsIgnoreCase("add")) {
-                if (args.length < 3) {
-                    sender.sendMessage("§cUsage: /webdash add <name> <command>");
+                String joinedArgs = StringUtil.joinStringArray(args, " ", 1);
+                String name = joinedArgs.split(" /")[0];
+                String command = StringUtil.getRestOfString(joinedArgs, " /");
+                if (command.equals("")) {
+                    sender.sendMessage("§cUsage: /webdash add <name> /<command>");
                     return true;
                 }
-                String name = args[1];
-                String command = StringUtil.unformatCommand(args, 2);
                 sender.sendMessage("§aAdded button §e" + name + "§a with command §b/" + command + "§a.");
                 RouteHandler.addRoute(new Route(name, command));
                 return true;
