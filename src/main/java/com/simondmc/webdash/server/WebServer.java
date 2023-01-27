@@ -1,6 +1,7 @@
 package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
+import com.simondmc.webdash.config.Configs;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,17 +22,28 @@ public class WebServer {
 
     public static boolean start() {
         try {
-            // reload config
-            WebDash.plugin.reloadConfig();
 
             // start server
-            int port = WebDash.plugin.getConfig().getInt("port");
+            int port = 0;
+            boolean invalid = false;
+            try {
+                port = Configs.reloadAndGet("config.yml").getConfig().getInt("port");
+            } catch (Exception e) {
+                invalid = true;
+            }
+            if (port < 0 || port > 65535) invalid = true;
+            if (invalid) {
+                WebDash.logger.warning("Invalid port in config.yml! Using default port 26666");
+                port = 26666;
+            }
+
             server = HttpServer.create(new InetSocketAddress(port), 0);
             WebDash.logger.info("Creating server at port " + port);
             server.createContext("/", new MainDashboard());
             server.createContext("/send", new SendRoute());
             server.createContext("/get", new GetRoute());
             server.createContext("/delete", new DeleteRoute());
+            server.createContext("/period", new PeriodRoute());
             server.setExecutor(null);
             server.start();
             running = true;

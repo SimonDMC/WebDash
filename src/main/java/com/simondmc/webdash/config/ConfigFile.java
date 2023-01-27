@@ -40,4 +40,9 @@ public class ConfigFile {
     public FileConfiguration getConfig() {
         return config;
     }
+
+    public void reload() {
+        File customConfigFile = new File(WebDash.plugin.getDataFolder(), name);
+        config = YamlConfiguration.loadConfiguration(customConfigFile);
+    }
 }

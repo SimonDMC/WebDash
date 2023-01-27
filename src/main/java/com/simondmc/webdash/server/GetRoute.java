@@ -17,7 +17,7 @@ public class GetRoute implements HttpHandler {
         if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         he.sendResponseHeaders(200, response.length());
         OutputStream os = he.getResponseBody();
-        os.write(response.toString().getBytes());
+        os.write(response.getBytes());
         os.close();
     }
 }

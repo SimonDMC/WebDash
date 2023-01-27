@@ -2,6 +2,7 @@ package com.simondmc.webdash;
 
 import com.simondmc.webdash.command.WebDashCommand;
 import com.simondmc.webdash.command.WebDashTabCompleter;
+import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.config.RoutesConfig;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,8 +25,8 @@ public final class WebDash extends JavaPlugin {
         getCommand("webdash").setTabCompleter(new WebDashTabCompleter());
         getCommand("wd").setTabCompleter(new WebDashTabCompleter());
 
-        // copy config file into plugin directory
-        saveDefaultConfig();
+        // init main config
+        Configs.add("config.yml");
 
         // init routes config
         RoutesConfig.init();

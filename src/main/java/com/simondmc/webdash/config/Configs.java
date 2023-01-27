@@ -13,4 +13,9 @@ public class Configs {
     public static ConfigFile get(String configName) {
         return configList.get(configName);
     }
+
+    public static ConfigFile reloadAndGet(String configName) {
+        configList.get(configName).reload();
+        return configList.get(configName);
+    }
 }
