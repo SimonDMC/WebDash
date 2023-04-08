@@ -16,6 +16,10 @@ public class Route {
         this(name, command, "#5781af", RouteHandler.getRoutes().size(), StringUtil.generateId(name));
     }
 
+    public Route(String name, String command, String color) {
+        this(name, command, color, RouteHandler.getRoutes().size(), StringUtil.generateId(name));
+    }
+
     // load existing route
     public Route(String name, String command, String color, int index, String id) {
         this.name = name;

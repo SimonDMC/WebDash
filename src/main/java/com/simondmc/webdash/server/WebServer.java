@@ -44,6 +44,7 @@ public class WebServer {
             server.createContext("/get", new GetRoute());
             server.createContext("/delete", new DeleteRoute());
             server.createContext("/period", new PeriodRoute());
+            server.createContext("/add", new AddRoute());
             server.setExecutor(null);
             server.start();
             running = true;
