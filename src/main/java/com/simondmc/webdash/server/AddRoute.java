@@ -30,7 +30,7 @@ public class AddRoute implements HttpHandler {
 
         // send response
         if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-        if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Methods", "DELETE");
+        if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Methods", "POST");
         he.sendResponseHeaders(status, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());

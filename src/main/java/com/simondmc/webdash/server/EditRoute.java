@@ -1,5 +1,6 @@
 package com.simondmc.webdash.server;
 
+import com.simondmc.webdash.config.RoutesConfig;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -41,9 +42,12 @@ public class EditRoute implements HttpHandler {
             route.setColor(color);
         }
 
+        // save routes
+        RoutesConfig.saveRoutes();
+
         // send response
         if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-        if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Methods", "DELETE");
+        if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Methods", "POST");
         he.sendResponseHeaders(status, response.length());
         OutputStream os = he.getResponseBody();
         os.write(response.getBytes());
