@@ -27,6 +27,15 @@ public class RouteHandler {
         return null;
     }
 
+    public static Route getRoute(int index) {
+        for (Route route : routes) {
+            if (route.getIndex() == index) {
+                return route;
+            }
+        }
+        return null;
+    }
+
     // returns true if successful, false if route doesn't exist
     public static boolean removeRoute(String id) {
 
