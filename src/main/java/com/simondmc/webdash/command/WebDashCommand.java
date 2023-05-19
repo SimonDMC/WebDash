@@ -81,7 +81,7 @@ public class WebDashCommand implements CommandExecutor {
                 }
                 String link = WebServer.getLink();
                 String baseLink = WebServer.getBaseLink();
-                String message = "§aDashboard Link: §e" + baseLink;
+                String message = "§aDashboard Link: §e" + (sender instanceof Player ? baseLink : link);
                 if (sender instanceof Player) {
                     PlayerUtil.sendClickableMessage(sender, message, link);
                 } else {
