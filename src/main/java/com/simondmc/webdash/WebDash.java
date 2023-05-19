@@ -3,6 +3,7 @@ package com.simondmc.webdash;
 import com.simondmc.webdash.command.WebDashCommand;
 import com.simondmc.webdash.command.WebDashTabCompleter;
 import com.simondmc.webdash.config.Configs;
+import com.simondmc.webdash.config.DataConfig;
 import com.simondmc.webdash.config.RoutesConfig;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +31,9 @@ public final class WebDash extends JavaPlugin {
 
         // init routes config
         RoutesConfig.init();
+
+        // init data config
+        DataConfig.init();
 
         // start web server
         WebServer.start();

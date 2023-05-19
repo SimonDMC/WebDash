@@ -10,3 +10,8 @@ port: 26666
 # How often to refresh the button data (every x milliseconds)
 # Default: 500
 refresh-period: 500
+
+
+# How many characters the dashboard protection key should be
+# Default: 100
+key-length: 100

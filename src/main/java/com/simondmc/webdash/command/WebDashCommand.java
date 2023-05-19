@@ -1,5 +1,6 @@
 package com.simondmc.webdash.command;
 
+import com.simondmc.webdash.key.KeyHandler;
 import com.simondmc.webdash.server.Route;
 import com.simondmc.webdash.server.RouteHandler;
 import com.simondmc.webdash.server.WebServer;
@@ -19,7 +20,7 @@ public class WebDashCommand implements CommandExecutor {
         if (cmd.getName().toLowerCase().matches("^(webdash:)?(webdash|wd)$")) {
             if (args.length == 0) {
                 // base help message
-                sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, on, off");
+                sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, key, on, off");
                 return true;
             }
 
@@ -79,9 +80,10 @@ public class WebDashCommand implements CommandExecutor {
                     return true;
                 }
                 String link = WebServer.getLink();
-                String message = "§aDashboard Link: §e" + link;
+                String baseLink = WebServer.getBaseLink();
+                String message = "§aDashboard Link: §e" + baseLink;
                 if (sender instanceof Player) {
-                    PlayerUtil.sendClickableMessage((Player) sender, message, link);
+                    PlayerUtil.sendClickableMessage(sender, message, link);
                 } else {
                     sender.sendMessage(message);
                 }
@@ -96,9 +98,10 @@ public class WebDashCommand implements CommandExecutor {
                 boolean success = WebServer.start();
                 if (success) {
                     String link = WebServer.getLink();
-                    String message = "§aServer restarted successfully at §e" + link + "§a.";
+                    String baseLink = WebServer.getBaseLink();
+                    String message = "§aServer restarted successfully at §e" + baseLink + "§a.";
                     if (sender instanceof Player) {
-                        PlayerUtil.sendClickableMessage((Player) sender, message, link);
+                        PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         sender.sendMessage(message);
                     }
@@ -108,8 +111,55 @@ public class WebDashCommand implements CommandExecutor {
                 return true;
             }
 
+            /* /webdash key <on/off/reset> */
+            if (subcommand.equalsIgnoreCase("key")) {
+                if (args.length < 2) {
+                    sender.sendMessage("§cUsage: /webdash key <on/off/reset>");
+                    return true;
+                }
+                String subarg = args[1];
+                if (subarg.equalsIgnoreCase("on")) {
+                    if (KeyHandler.enableKey()) {
+                        String link = WebServer.getLink();
+                        String message = "§eDashboard key protection is now §a§lON§e. Open the dashboard by clicking §e§lhere§e.";
+                        PlayerUtil.sendClickableMessage(sender, message, link);
+                    } else {
+                        String link = WebServer.getLink();
+                        String message = "§eDashboard key protection is already on. Open the dashboard by clicking §e§lhere§e.";
+                        PlayerUtil.sendClickableMessage(sender, message, link);
+                    }
+                    return true;
+                }
+                if (subarg.equalsIgnoreCase("off")) {
+                    if (KeyHandler.disableKey()) {
+                        String link = WebServer.getLink();
+                        String message = "§eDashboard key protection is now §c§lOFF§e. Open the dashboard by clicking §e§lhere§e.";
+                        PlayerUtil.sendClickableMessage(sender, message, link);
+                    } else {
+                        String link = WebServer.getLink();
+                        String message = "§eDashboard key protection is already off. Open the dashboard by clicking §e§lhere§e.";
+                        PlayerUtil.sendClickableMessage(sender, message, link);
+                    }
+                    return true;
+                }
+                if (subarg.equalsIgnoreCase("reset")) {
+                    KeyHandler.generateKey();
+                    String link = WebServer.getLink();
+                    if (KeyHandler.isEnabled()) {
+                        String message = "§eThe dashboard key has been reset. Open the dashboard by clicking §e§lhere§e.";
+                        PlayerUtil.sendClickableMessage(sender, message, link);
+                    } else {
+                        String message = "§eDashboard key protection is currently off. Nonetheless, the dashboard key has been reset. Open the dashboard by clicking §e§lhere§e.";
+                        PlayerUtil.sendClickableMessage(sender, message, link);
+                    }
+                    return true;
+                }
+                sender.sendMessage("§cUsage: /webdash key <on/off/reset>");
+                return true;
+            }
+
             // base help message
-            sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, on, off");
+            sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, key, on, off");
             return true;
         }
         return false;

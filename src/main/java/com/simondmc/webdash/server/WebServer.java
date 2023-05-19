@@ -2,6 +2,7 @@ package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
+import com.simondmc.webdash.key.KeyHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -67,12 +68,21 @@ public class WebServer {
         running = false;
     }
 
-    public static String getLink() {
+    public static String getBaseLink() {
         int port = WebDash.plugin.getConfig().getInt("port");
         String ip = Bukkit.getIp();
         if (ip.equals("")) {
             ip = "localhost";
         }
         return "http://" + ip + ":" + port;
+    }
+
+    public static String getLink() {
+        String link = getBaseLink();
+        if (KeyHandler.isEnabled()) {
+            link += "?key=";
+            link += KeyHandler.getKey();
+        }
+        return link;
     }
 }
