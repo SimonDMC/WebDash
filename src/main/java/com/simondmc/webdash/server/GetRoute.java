@@ -1,5 +1,6 @@
 package com.simondmc.webdash.server;
 
+import com.simondmc.webdash.key.AuthChecker;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -10,6 +11,8 @@ public class GetRoute implements HttpHandler {
 
     @Override
     public void handle(HttpExchange he) throws IOException {
+        // auth check
+        if (AuthChecker.isUnauthorized(he)) return;
 
         String response = RouteHandler.getJSON();
 

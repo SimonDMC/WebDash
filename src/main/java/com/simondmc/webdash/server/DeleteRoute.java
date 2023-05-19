@@ -1,6 +1,7 @@
 package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
+import com.simondmc.webdash.key.AuthChecker;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -8,12 +9,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.Objects;
 
 public class DeleteRoute implements HttpHandler {
 
     @Override
     public void handle(HttpExchange he) throws IOException {
+        // auth check
+        if (AuthChecker.isUnauthorized(he)) return;
+
         // parse DELETE request
         InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);

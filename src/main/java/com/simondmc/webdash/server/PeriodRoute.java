@@ -2,6 +2,7 @@ package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
+import com.simondmc.webdash.key.AuthChecker;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -12,6 +13,8 @@ public class PeriodRoute implements HttpHandler {
 
     @Override
     public void handle(HttpExchange he) throws IOException {
+        // auth check
+        if (AuthChecker.isUnauthorized(he)) return;
 
         int period = 0;
         boolean invalid = false;
