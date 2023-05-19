@@ -1,5 +1,6 @@
 package com.simondmc.webdash.command;
 
+import com.simondmc.webdash.key.KeyHandler;
 import com.simondmc.webdash.server.Route;
 import com.simondmc.webdash.server.RouteHandler;
 import org.bukkit.command.Command;
@@ -16,7 +17,7 @@ public class WebDashTabCompleter implements TabCompleter {
 
         // base command
         if (args.length == 1) {
-            List<String> list = Arrays.asList("add", "remove", "list", "link", "restart", "on", "off");
+            List<String> list = Arrays.asList("add", "remove", "list", "link", "restart", "key", "on", "off");
             List<String> arguments = new ArrayList<>(list);
             for (String arg : list) {
                 if (!arg.toLowerCase().startsWith(args[0].toLowerCase())) {
@@ -26,10 +27,28 @@ public class WebDashTabCompleter implements TabCompleter {
             return arguments;
         }
 
-        // remove command
+        // remove subcommand
         if (args.length == 2 && args[0].equalsIgnoreCase("remove")) {
             List<String> list = RouteHandler.getRoutes().stream().map(Route::getId).toList();
             List<String> arguments = new ArrayList<>(list);
+            for (String arg : list) {
+                if (!arg.toLowerCase().startsWith(args[1].toLowerCase())) {
+                    arguments.remove(arg);
+                }
+            }
+            return arguments;
+        }
+
+        // key subcommand
+        if (args.length == 2 && args[0].equalsIgnoreCase("key")) {
+            List<String> list = Arrays.asList("on", "off", "reset");
+            List<String> arguments = new ArrayList<>(list);
+            // remove current setting
+            if (KeyHandler.isEnabled()) {
+                arguments.remove("on");
+            } else {
+                arguments.remove("off");
+            }
             for (String arg : list) {
                 if (!arg.toLowerCase().startsWith(args[1].toLowerCase())) {
                     arguments.remove(arg);
