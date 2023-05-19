@@ -2,7 +2,7 @@ package com.simondmc.webdash.key;
 
 public class KeyGenerator {
 
-    private String key;
+    private final String key;
     public KeyGenerator(int length) {
         final String[] chars = new String[] {
                 "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",

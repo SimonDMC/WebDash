@@ -39,10 +39,18 @@ public class KeyHandler {
 
     public static void generateKey() {
         int length = 100;
+        boolean invalid = false;
         try {
             length = Configs.reloadAndGet("config.yml").getConfig().getInt("key-length");
         } catch (Exception e) {
+            invalid = true;
+        }
+        if (length < 1 || length > 10000) {
+            invalid = true;
+        }
+        if (invalid) {
             WebDash.logger.warning("Invalid key length in config.yml! Using default length of 100");
+            length = 100;
         }
         KeyGenerator keygen = new KeyGenerator(length);
         key = keygen.getKey();
