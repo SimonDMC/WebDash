@@ -121,11 +121,11 @@ public class WebDashCommand implements CommandExecutor {
                 if (subarg.equalsIgnoreCase("on")) {
                     if (KeyHandler.enableKey()) {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is now §a§lON§e. Open the dashboard by clicking §e§lhere§e.";
+                        String message = "§eDashboard key protection is now §a§lON§e. Open it by clicking §b§nhere§e.";
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is already on. Open the dashboard by clicking §e§lhere§e.";
+                        String message = "§eDashboard key protection is already on. Open it by clicking §b§nhere§e.";
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -133,11 +133,11 @@ public class WebDashCommand implements CommandExecutor {
                 if (subarg.equalsIgnoreCase("off")) {
                     if (KeyHandler.disableKey()) {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is now §c§lOFF§e. Open the dashboard by clicking §e§lhere§e.";
+                        String message = "§eDashboard key protection is now §c§lOFF§e. Open it by clicking §b§nhere§e.";
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is already off. Open the dashboard by clicking §e§lhere§e.";
+                        String message = "§eDashboard key protection is already off. Open it by clicking §b§nhere§e.";
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -146,10 +146,10 @@ public class WebDashCommand implements CommandExecutor {
                     KeyHandler.generateKey();
                     String link = WebServer.getLink();
                     if (KeyHandler.isEnabled()) {
-                        String message = "§eThe dashboard key has been reset. Open the dashboard by clicking §e§lhere§e.";
+                        String message = "§eThe dashboard key has been reset. Open it by clicking §b§nhere§e.";
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
-                        String message = "§eDashboard key protection is currently off. Nonetheless, the dashboard key has been reset. Open the dashboard by clicking §e§lhere§e.";
+                        String message = "§eThe dashboard key has been reset (though key protection is currently disabled). Open the dashboard by clicking §b§nhere§e.";
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
