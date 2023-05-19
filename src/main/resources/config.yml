@@ -13,5 +13,5 @@ refresh-period: 500
 
 
 # How many characters the dashboard protection key should be
-# Default: 100
-key-length: 100
+# Default: 200
+key-length: 200
