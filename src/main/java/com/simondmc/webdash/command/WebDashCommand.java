@@ -17,11 +17,10 @@ public class WebDashCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // take webdash and wd, case-insensitive, with optional `webdash:` prefix
-        if (cmd.getName().toLowerCase().matches("^(webdash:)?(webdash|wd)$")) {
+        if (cmd.getName().equals("webdash")) {
             if (args.length == 0) {
-                // base help message
-                sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, key, on, off");
-                return true;
+                // TODO: explanatory message
+                return false;
             }
 
             String subcommand = args[0];
@@ -157,10 +156,7 @@ public class WebDashCommand implements CommandExecutor {
                 sender.sendMessage("§cUsage: /webdash key <on/off/reset>");
                 return true;
             }
-
-            // base help message
-            sender.sendMessage("§cValid subcommands: add, remove, list, link, restart, key, on, off");
-            return true;
+            return false;
         }
         return false;
     }

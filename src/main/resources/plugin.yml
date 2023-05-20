@@ -2,10 +2,17 @@ name: WebDash
 version: '${project.version}'
 main: com.simondmc.webdash.WebDash
 api-version: 1.19
-authors: [ SimonDMC ]
-description: Web Dashboard Test
+author: SimonDMC
+description: A Web Dashboard for your Minecraft server
 website: simondmc.com
 
 commands:
   webdash:
-  wd:
+    usage: "§cUsage: /<command> <add/remove/list/link/restart/key/on/off>"
+    aliases: [wd]
+    permission: webdash.command
+    permission-message: §cYou do not have permission to use this command.
+permissions:
+    webdash.command:
+        description: Gives access to the WebDash command
+        default: op
