@@ -1,4 +1,4 @@
-package com.simondmc.webdash.server;
+package com.simondmc.webdash.route;
 
 import com.simondmc.webdash.config.RoutesConfig;
 

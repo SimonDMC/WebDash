@@ -1,5 +1,6 @@
-package com.simondmc.webdash.server;
+package com.simondmc.webdash.route;
 
+import com.simondmc.webdash.route.RouteHandler;
 import com.simondmc.webdash.util.StringUtil;
 
 public class Route {

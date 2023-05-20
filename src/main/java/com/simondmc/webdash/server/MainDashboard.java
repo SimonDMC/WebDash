@@ -1,6 +1,8 @@
 package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.key.KeyHandler;
+import com.simondmc.webdash.route.Route;
+import com.simondmc.webdash.route.RouteHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 

@@ -1,7 +1,7 @@
 package com.simondmc.webdash.config;
 
-import com.simondmc.webdash.server.Route;
-import com.simondmc.webdash.server.RouteHandler;
+import com.simondmc.webdash.route.Route;
+import com.simondmc.webdash.route.RouteHandler;
 
 import java.util.ArrayList;
 import java.util.List;
