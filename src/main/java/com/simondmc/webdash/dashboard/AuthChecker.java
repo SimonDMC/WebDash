@@ -1,4 +1,4 @@
-package com.simondmc.webdash.key;
+package com.simondmc.webdash.dashboard;
 
 import com.simondmc.webdash.server.WebServer;
 import com.sun.net.httpserver.HttpExchange;

@@ -1,6 +1,7 @@
 package com.simondmc.webdash.config;
 
-import com.simondmc.webdash.key.KeyHandler;
+import com.simondmc.webdash.dashboard.KeyHandler;
+import com.simondmc.webdash.dashboard.StatusHandler;
 
 public class DataConfig {
     private static final String CONFIG_NAME = "data.yml";
@@ -8,6 +9,17 @@ public class DataConfig {
     public static void init() {
         Configs.add(CONFIG_NAME);
         KeyHandler.init();
+        StatusHandler.init();
+    }
+
+    public static boolean getEnabled() {
+        boolean enabled;
+        try {
+            enabled = Configs.get(CONFIG_NAME).getConfig().getBoolean("enabled");
+        } catch (Exception e) {
+            enabled = true;
+        }
+        return enabled;
     }
 
     public static String getKey() {
@@ -28,6 +40,11 @@ public class DataConfig {
             enabled = false;
         }
         return enabled;
+    }
+
+    public static void setEnabled(Boolean enabled) {
+        Configs.get(CONFIG_NAME).getConfig().set("enabled", enabled);
+        Configs.get(CONFIG_NAME).save();
     }
 
     public static void setKey(String key) {

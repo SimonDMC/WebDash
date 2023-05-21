@@ -1,4 +1,4 @@
-package com.simondmc.webdash.key;
+package com.simondmc.webdash.dashboard;
 
 public class KeyGenerator {
 

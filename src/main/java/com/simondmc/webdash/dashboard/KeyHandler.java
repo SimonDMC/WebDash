@@ -1,8 +1,9 @@
-package com.simondmc.webdash.key;
+package com.simondmc.webdash.dashboard;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.config.DataConfig;
+import com.simondmc.webdash.dashboard.KeyGenerator;
 
 public class KeyHandler {
 

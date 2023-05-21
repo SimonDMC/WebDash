@@ -1,6 +1,6 @@
 package com.simondmc.webdash.command;
 
-import com.simondmc.webdash.key.KeyHandler;
+import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import org.bukkit.command.Command;

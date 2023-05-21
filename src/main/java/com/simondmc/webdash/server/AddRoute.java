@@ -1,6 +1,6 @@
 package com.simondmc.webdash.server;
 
-import com.simondmc.webdash.key.AuthChecker;
+import com.simondmc.webdash.dashboard.AuthChecker;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import com.sun.net.httpserver.HttpExchange;

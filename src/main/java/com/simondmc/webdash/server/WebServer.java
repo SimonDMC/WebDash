@@ -2,7 +2,7 @@ package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
-import com.simondmc.webdash.key.KeyHandler;
+import com.simondmc.webdash.dashboard.KeyHandler;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

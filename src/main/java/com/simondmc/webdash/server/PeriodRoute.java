@@ -2,7 +2,7 @@ package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
-import com.simondmc.webdash.key.AuthChecker;
+import com.simondmc.webdash.dashboard.AuthChecker;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 

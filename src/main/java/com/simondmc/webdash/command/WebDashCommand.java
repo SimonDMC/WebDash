@@ -1,7 +1,7 @@
 package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.config.MessagesConfig;
-import com.simondmc.webdash.key.KeyHandler;
+import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import com.simondmc.webdash.server.WebServer;

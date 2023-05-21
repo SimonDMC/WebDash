@@ -1,7 +1,5 @@
 package com.simondmc.webdash.config;
 
-import com.simondmc.webdash.key.KeyHandler;
-
 public class MessagesConfig {
     private static final String CONFIG_NAME = "messages.yml";
 
