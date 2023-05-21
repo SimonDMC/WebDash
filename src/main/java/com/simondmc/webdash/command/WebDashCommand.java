@@ -2,6 +2,7 @@ package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.dashboard.KeyHandler;
+import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import com.simondmc.webdash.server.WebServer;
@@ -75,7 +76,7 @@ public class WebDashCommand implements CommandExecutor {
             if (subcommand.equalsIgnoreCase("link")) {
                 // check if server is running
                 if (!WebServer.isRunning()) {
-                    sender.sendMessage(MessagesConfig.get("link-not-running"));
+                    sender.sendMessage(MessagesConfig.get("not-running"));
                     return true;
                 }
                 String link = WebServer.getLink();
@@ -153,6 +154,40 @@ public class WebDashCommand implements CommandExecutor {
                     return true;
                 }
                 sender.sendMessage(MessagesConfig.get("key-help"));
+                return true;
+            }
+
+            /* /webdash on */
+            if (subcommand.equalsIgnoreCase("on") || subcommand.equalsIgnoreCase("enable")) {
+                // check if server is running
+                if (!WebServer.isRunning()) {
+                    sender.sendMessage(MessagesConfig.get("not-running"));
+                    return true;
+                }
+                if (StatusHandler.enable()) {
+                    String link = WebServer.getLink();
+                    String message = MessagesConfig.get("on-success");
+                    PlayerUtil.sendClickableMessage(sender, message, link);
+                } else {
+                    String link = WebServer.getLink();
+                    String message = MessagesConfig.get("on-already-on");
+                    PlayerUtil.sendClickableMessage(sender, message, link);
+                }
+                return true;
+            }
+
+            /* /webdash off */
+            if (subcommand.equalsIgnoreCase("off") || subcommand.equalsIgnoreCase("disable")) {
+                // check if server is running
+                if (!WebServer.isRunning()) {
+                    sender.sendMessage(MessagesConfig.get("not-running"));
+                    return true;
+                }
+                if (StatusHandler.disable()) {
+                    sender.sendMessage(MessagesConfig.get("off-success"));
+                } else {
+                    sender.sendMessage(MessagesConfig.get("off-already-off"));
+                }
                 return true;
             }
             return false;

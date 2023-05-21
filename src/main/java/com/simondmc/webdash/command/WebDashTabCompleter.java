@@ -1,6 +1,7 @@
 package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.dashboard.KeyHandler;
+import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import org.bukkit.command.Command;
@@ -19,6 +20,12 @@ public class WebDashTabCompleter implements TabCompleter {
         if (args.length == 1) {
             List<String> list = Arrays.asList("add", "remove", "list", "link", "restart", "key", "on", "off");
             List<String> arguments = new ArrayList<>(list);
+            // remove current on/off setting
+            if (StatusHandler.isEnabled()) {
+                arguments.remove("on");
+            } else {
+                arguments.remove("off");
+            }
             for (String arg : list) {
                 if (!arg.toLowerCase().startsWith(args[0].toLowerCase())) {
                     arguments.remove(arg);
@@ -43,7 +50,7 @@ public class WebDashTabCompleter implements TabCompleter {
         if (args.length == 2 && args[0].equalsIgnoreCase("key")) {
             List<String> list = Arrays.asList("on", "off", "reset");
             List<String> arguments = new ArrayList<>(list);
-            // remove current setting
+            // remove current on/off setting
             if (KeyHandler.isEnabled()) {
                 arguments.remove("on");
             } else {

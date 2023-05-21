@@ -13,8 +13,7 @@ public class PeriodRoute implements HttpHandler {
 
     @Override
     public void handle(HttpExchange he) throws IOException {
-        // auth check
-        if (AuthChecker.isUnauthorized(he)) return;
+        // no auth check
 
         int period = 0;
         boolean invalid = false;

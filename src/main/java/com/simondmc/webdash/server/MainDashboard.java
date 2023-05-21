@@ -1,6 +1,7 @@
 package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.dashboard.KeyHandler;
+import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -28,21 +29,29 @@ public class MainDashboard implements HttpHandler {
         if (query != null) {
             queryBits = List.of(query.split("[&=]"));
         }
-        boolean unauthorized = KeyHandler.isEnabled() && !queryBits.contains(KeyHandler.getKey());
+        String defaultPath;
+        if (!StatusHandler.isEnabled()) {
+            // WebDash is disabled, serve off.html
+            defaultPath = "/off.html";
+        } else if (KeyHandler.isEnabled() && !queryBits.contains(KeyHandler.getKey())) {
+            // Key protection is enabled and key is wrong/missing, serve no.html
+            defaultPath = "/no.html";
+        } else {
+            // WebDash is enabled and key is correct/disabled, serve index.html
+            defaultPath = "/index.html";
+        }
 
         String path = he.getRequestURI().getPath();
-        // try to get file from resources/dash, if not found, use resources/dash/index.html
+
+        // try to get file from resources/dash, if not found, use default path
         if (path.equals("/")) {
-            path = "/index.html";
-        }
-        // if key protection is enabled, serve no.html instead of dashboard if key is wrong/missing
-        if (unauthorized && path.equals("/index.html")) {
-            path = "/no.html";
+            path = defaultPath;
         }
         InputStream is = getClass().getClassLoader().getResourceAsStream("dash" + path);
         if (is == null) {
-            is = getClass().getClassLoader().getResourceAsStream(unauthorized ? "dash/no.html" : "dash/index.html");
+            is = getClass().getClassLoader().getResourceAsStream("dash" + defaultPath);
         }
+
         String fileData = new String(is.readAllBytes());
         fileData = fileData.replace("%buttons%", getButtons());
         he.sendResponseHeaders(200, fileData.getBytes().length);
