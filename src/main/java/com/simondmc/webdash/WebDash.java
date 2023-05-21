@@ -4,6 +4,7 @@ import com.simondmc.webdash.command.WebDashCommand;
 import com.simondmc.webdash.command.WebDashTabCompleter;
 import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.config.DataConfig;
+import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.config.RoutesConfig;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,6 +35,9 @@ public final class WebDash extends JavaPlugin {
 
         // init data config
         DataConfig.init();
+
+        // init messages config
+        MessagesConfig.init();
 
         // start web server
         WebServer.start();

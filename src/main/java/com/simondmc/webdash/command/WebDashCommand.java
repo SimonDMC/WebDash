@@ -1,5 +1,6 @@
 package com.simondmc.webdash.command;
 
+import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.key.KeyHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
@@ -30,10 +31,10 @@ public class WebDashCommand implements CommandExecutor {
                 String name = joinedArgs.split(" /")[0];
                 String command = StringUtil.getRestOfString(joinedArgs, " /");
                 if (command.equals("")) {
-                    sender.sendMessage("§cUsage: /webdash add <name> /<command>");
+                    sender.sendMessage(MessagesConfig.get("add-help"));
                     return true;
                 }
-                sender.sendMessage("§aAdded button §e" + name + "§a with command §b/" + command + "§a.");
+                sender.sendMessage(MessagesConfig.get("add-success").formatted(name, command));
                 RouteHandler.addRoute(new Route(name, command));
                 return true;
             }
@@ -41,7 +42,7 @@ public class WebDashCommand implements CommandExecutor {
             /* /webdash remove <id> */
             if (subcommand.equalsIgnoreCase("remove")) {
                 if (args.length < 2) {
-                    sender.sendMessage("§cUsage: /webdash remove <id>");
+                    sender.sendMessage(MessagesConfig.get("remove-help"));
                     return true;
                 }
                 String id = args[1];
@@ -49,9 +50,9 @@ public class WebDashCommand implements CommandExecutor {
                 Route route = RouteHandler.getRoute(id);
 
                 if (RouteHandler.removeRoute(id)) {
-                    sender.sendMessage("§aRemoved button §e" + route.getName() + "§a.");
+                    sender.sendMessage(MessagesConfig.get("remove-success").formatted(route.getName()));
                 } else {
-                    sender.sendMessage("§cButton with id §e" + id + "§c does not exist.");
+                    sender.sendMessage(MessagesConfig.get("remove-fail").formatted(id));
                 }
                 return true;
             }
@@ -60,12 +61,12 @@ public class WebDashCommand implements CommandExecutor {
             if (subcommand.equalsIgnoreCase("list")) {
                 List<Route> routes = RouteHandler.getRoutes();
                 if (routes.size() == 0) {
-                    sender.sendMessage("§cNo buttons have been added yet, use §e/webdash add <name> /<command>§c to add one.");
+                    sender.sendMessage(MessagesConfig.get("list-empty"));
                     return true;
                 }
-                sender.sendMessage("§aListing all buttons:");
+                sender.sendMessage(MessagesConfig.get("list-header"));
                 for (Route route : routes) {
-                    sender.sendMessage("§e" + route.getName() + "§a: §b/" + route.getCommand());
+                    sender.sendMessage(MessagesConfig.get("list-item").formatted(route.getName(), route.getCommand()));
                 }
                 return true;
             }
@@ -74,14 +75,14 @@ public class WebDashCommand implements CommandExecutor {
             if (subcommand.equalsIgnoreCase("link")) {
                 // check if server is running
                 if (!WebServer.isRunning()) {
-                    sender.sendMessage("§cServer is not running. Run §e/webdash restart§c and check the console to see what went wrong.");
+                    sender.sendMessage(MessagesConfig.get("link-not-running"));
                     return true;
                 }
                 String link = WebServer.getLink();
                 String baseLink = WebServer.getBaseLink();
-                String message = "§aDashboard Link: §e" + (sender instanceof Player ? baseLink : link);
+                String message = MessagesConfig.get("link-success").formatted(sender instanceof Player ? baseLink : link);
                 if (KeyHandler.isEnabled() && sender instanceof Player) {
-                    message += " §7(key is in the clickable link)";
+                    message += MessagesConfig.get("link-key-suffix");
                 }
                 PlayerUtil.sendClickableMessage(sender, message, link);
                 return true;
@@ -96,14 +97,14 @@ public class WebDashCommand implements CommandExecutor {
                 if (success) {
                     String link = WebServer.getLink();
                     String baseLink = WebServer.getBaseLink();
-                    String message = "§aServer restarted successfully at §e" + baseLink + "§a.";
+                    String message = MessagesConfig.get("restart-success").formatted(baseLink);
                     if (sender instanceof Player) {
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         sender.sendMessage(message);
                     }
                 } else {
-                    sender.sendMessage("§cServer failed to start. Check the console for more information.");
+                    sender.sendMessage(MessagesConfig.get("restart-fail"));
                 }
                 return true;
             }
@@ -111,18 +112,18 @@ public class WebDashCommand implements CommandExecutor {
             /* /webdash key <on/off/reset> */
             if (subcommand.equalsIgnoreCase("key")) {
                 if (args.length < 2) {
-                    sender.sendMessage("§cUsage: /webdash key <on/off/reset>");
+                    sender.sendMessage(MessagesConfig.get("key-help"));
                     return true;
                 }
                 String subarg = args[1];
                 if (subarg.equalsIgnoreCase("on")) {
                     if (KeyHandler.enableKey()) {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is now §a§lON§e. Open it by clicking §b§nhere§e.";
+                        String message = MessagesConfig.get("key-on");
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is already on. Open it by clicking §b§nhere§e.";
+                        String message = MessagesConfig.get("key-already-on");
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -130,11 +131,11 @@ public class WebDashCommand implements CommandExecutor {
                 if (subarg.equalsIgnoreCase("off")) {
                     if (KeyHandler.disableKey()) {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is now §c§lOFF§e. Open it by clicking §b§nhere§e.";
+                        String message = MessagesConfig.get("key-off");
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         String link = WebServer.getLink();
-                        String message = "§eDashboard key protection is already off. Open it by clicking §b§nhere§e.";
+                        String message = MessagesConfig.get("key-already-off");
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -143,15 +144,15 @@ public class WebDashCommand implements CommandExecutor {
                     KeyHandler.generateKey();
                     String link = WebServer.getLink();
                     if (KeyHandler.isEnabled()) {
-                        String message = "§eThe dashboard key has been reset. Open it by clicking §b§nhere§e.";
+                        String message = MessagesConfig.get("key-reset");
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
-                        String message = "§eThe dashboard key has been reset (though key protection is currently disabled). Open the dashboard by clicking §b§nhere§e.";
+                        String message = MessagesConfig.get("key-reset-off");
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
                 }
-                sender.sendMessage("§cUsage: /webdash key <on/off/reset>");
+                sender.sendMessage(MessagesConfig.get("key-help"));
                 return true;
             }
             return false;

@@ -7,7 +7,10 @@ public class Configs {
     private static final HashMap<String, ConfigFile> configList = new HashMap<>();
 
     public static void add(String configName) {
-        configList.put(configName, new ConfigFile(configName));
+        configList.put(configName, new ConfigFile(configName, false));
+    }
+    public static void addOverwritable(String configName) {
+        configList.put(configName, new ConfigFile(configName, true));
     }
 
     public static ConfigFile get(String configName) {

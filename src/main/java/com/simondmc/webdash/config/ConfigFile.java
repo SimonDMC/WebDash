@@ -13,12 +13,12 @@ public class ConfigFile {
     private FileConfiguration config;
     private String name;
 
-    public ConfigFile(String name) {
+    public ConfigFile(String name, boolean overwrite) {
         this.name = name;
         File customConfigFile = new File(WebDash.plugin.getDataFolder(), name);
-        if (!customConfigFile.exists()) {
+        if (!customConfigFile.exists() || overwrite) {
             customConfigFile.getParentFile().mkdirs();
-            WebDash.plugin.saveResource(name, false);
+            WebDash.plugin.saveResource(name, overwrite);
         }
 
         config = new YamlConfiguration();

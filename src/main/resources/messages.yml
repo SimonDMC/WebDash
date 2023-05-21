@@ -1,0 +1,24 @@
+# WebDash Messages
+# NOTE: This file gets overwritten every time the plugin is reloaded or the server is restarted.
+# Any changes made to this file will be lost.
+
+add-help: "§cUsage: /webdash add <name> /<command>"
+add-success: "§aAdded button §e%s§a with command §b/%s§a."
+remove-help: "§cUsage: /webdash remove <id>"
+remove-success: "§aRemoved button §e%s§a."
+remove-fail: "§cButton with id §e%s§c does not exist."
+list-empty: "§cNo buttons have been added yet, use §e/webdash add <name> /<command>§c to add one."
+list-header: "§aButtons:"
+list-item: "§e%s§a: §b/%s"
+link-not-running: "§cServer is not running. Run §e/webdash restart§c and check the console to see what went wrong."
+link-success: "§aDashboard Link: §e%s"
+link-key-suffix: " §7(key is in the clickable link)"
+restart-success: "§aServer restarted successfully at §e%s§a."
+restart-fail: "§cServer failed to start. Check the console for more information."
+key-help: "§cUsage: /webdash key <on/off/reset>"
+key-on: "§eDashboard key protection is now §a§lON§e. Open it by clicking §b§nhere§e."
+key-already-on: "§eDashboard key protection is already on. Open it by clicking §b§nhere§e."
+key-off: "§eDashboard key protection is now §c§lOFF§e. Open it by clicking §b§nhere§e."
+key-already-off: "§eDashboard key protection is already off. Open it by clicking §b§nhere§e."
+key-reset: "§eThe dashboard key has been reset. Open it by clicking §b§nhere§e."
+key-reset-off: "§eThe dashboard key has been reset §7(though key protection is currently disabled)§e. Open the dashboard by clicking §b§nhere§e."
