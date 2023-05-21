@@ -16,7 +16,6 @@ import java.util.List;
 public class WebDashCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        // take webdash and wd, case-insensitive, with optional `webdash:` prefix
         if (cmd.getName().equals("webdash")) {
             if (args.length == 0) {
                 // TODO: explanatory message
@@ -81,11 +80,10 @@ public class WebDashCommand implements CommandExecutor {
                 String link = WebServer.getLink();
                 String baseLink = WebServer.getBaseLink();
                 String message = "§aDashboard Link: §e" + (sender instanceof Player ? baseLink : link);
-                if (sender instanceof Player) {
-                    PlayerUtil.sendClickableMessage(sender, message, link);
-                } else {
-                    sender.sendMessage(message);
+                if (KeyHandler.isEnabled() && sender instanceof Player) {
+                    message += " §7(key is in the clickable link)";
                 }
+                PlayerUtil.sendClickableMessage(sender, message, link);
                 return true;
             }
 
