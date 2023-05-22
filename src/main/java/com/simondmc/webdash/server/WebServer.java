@@ -23,8 +23,6 @@ public class WebServer {
 
     public static boolean start() {
         try {
-
-            // start server
             int port = 0;
             boolean invalid = false;
             try {
@@ -37,9 +35,10 @@ public class WebServer {
                 WebDash.logger.warning("Invalid port in config.yml! Using default port 26666");
                 port = 26666;
             }
-
-            server = HttpServer.create(new InetSocketAddress(port), 0);
             WebDash.logger.info("Starting server at port " + port);
+
+            // start server
+            server = HttpServer.create(new InetSocketAddress(port), 0);
             server.createContext("/", new MainDashboard());
             server.createContext("/send", new SendRoute());
             server.createContext("/get", new GetRoute());
