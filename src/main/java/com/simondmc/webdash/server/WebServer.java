@@ -39,7 +39,7 @@ public class WebServer {
             }
 
             server = HttpServer.create(new InetSocketAddress(port), 0);
-            WebDash.logger.info("Creating server at port " + port);
+            WebDash.logger.info("Starting server at port " + port);
             server.createContext("/", new MainDashboard());
             server.createContext("/send", new SendRoute());
             server.createContext("/get", new GetRoute());
@@ -52,18 +52,18 @@ public class WebServer {
             server.start();
             running = true;
             // send with color
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "WebDash server started at " + getLink());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "WebDash server started at " + getBaseLink());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             // send with color
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to start WebDash server at " + getLink());
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to start WebDash server at " + getBaseLink());
             return false;
         }
     }
 
     public static void stop() {
-        WebDash.logger.info("Stopping the server!");
+        WebDash.logger.info("Stopping WebDash server!");
         server.stop(0);
         running = false;
     }
