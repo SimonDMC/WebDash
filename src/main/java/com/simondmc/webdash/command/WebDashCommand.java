@@ -13,44 +13,44 @@ public class WebDashCommand implements CommandExecutor {
                 return false;
             }
 
-            String subcommand = args[0];
+            String subcommand = args[0].toLowerCase();
 
-            if (subcommand.equalsIgnoreCase("add")) {
+            if (subcommand.equals("add")) {
                 new WebDashAddSubcommand(sender, args);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("remove")) {
+            if (subcommand.equals("remove") || subcommand.equals("delete") || subcommand.equals("rm") || subcommand.equals("del")) {
                 new WebDashRemoveSubcommand(sender, args);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("list")) {
+            if (subcommand.equals("list")) {
                 new WebDashListSubcommand(sender);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("link")) {
+            if (subcommand.equals("link") || subcommand.equals("url")) {
                 new WebDashLinkSubcommand(sender);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("restart")) {
+            if (subcommand.equals("restart") || subcommand.equals("reload")) {
                 new WebDashRestartSubcommand(sender);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("key")) {
+            if (subcommand.equals("key")) {
                 new WebDashKeySubcommand(sender, args);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("on") || subcommand.equalsIgnoreCase("enable")) {
+            if (subcommand.equals("on") || subcommand.equals("enable")) {
                 new WebDashOnSubcommand(sender);
                 return true;
             }
 
-            if (subcommand.equalsIgnoreCase("off") || subcommand.equalsIgnoreCase("disable")) {
+            if (subcommand.equals("off") || subcommand.equals("disable")) {
                 new WebDashOffSubcommand(sender);
                 return true;
             }

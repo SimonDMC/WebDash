@@ -35,7 +35,7 @@ public class WebDashTabCompleter implements TabCompleter {
         }
 
         // remove subcommand
-        if (args.length == 2 && args[0].equalsIgnoreCase("remove")) {
+        if (args.length == 2 && new ArrayList<>(Arrays.asList("remove", "delete", "rm", "del")).contains(args[0].toLowerCase())) {
             List<String> list = RouteHandler.getRoutes().stream().map(Route::getId).toList();
             List<String> arguments = new ArrayList<>(list);
             for (String arg : list) {
@@ -48,7 +48,7 @@ public class WebDashTabCompleter implements TabCompleter {
 
         // key subcommand
         if (args.length == 2 && args[0].equalsIgnoreCase("key")) {
-            List<String> list = Arrays.asList("on", "off", "reset");
+            List<String> list = new ArrayList<>(Arrays.asList("set", "remove"));
             List<String> arguments = new ArrayList<>(list);
             // remove current on/off setting
             if (KeyHandler.isEnabled()) {

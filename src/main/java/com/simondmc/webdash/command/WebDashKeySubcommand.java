@@ -16,10 +16,10 @@ public class WebDashKeySubcommand {
             return;
         }
 
-        String subarg = args[1];
+        String subarg = args[1].toLowerCase();
         String openSuffix = sender instanceof Player ? MessagesConfig.get("player-open") : MessagesConfig.get("console-open");
 
-        if (subarg.equalsIgnoreCase("on")) {
+        if (subarg.equals("on") || subarg.equals("enable")) {
             if (KeyHandler.enableKey()) {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-on") + openSuffix.formatted(link);
@@ -31,7 +31,7 @@ public class WebDashKeySubcommand {
             }
             return;
         }
-        if (subarg.equalsIgnoreCase("off")) {
+        if (subarg.equals("off") || subarg.equals("disable")) {
             if (KeyHandler.disableKey()) {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-off") + openSuffix.formatted(link);
@@ -43,7 +43,7 @@ public class WebDashKeySubcommand {
             }
             return;
         }
-        if (subarg.equalsIgnoreCase("reset")) {
+        if (subarg.equals("reset")) {
             KeyHandler.generateKey();
             String link = WebServer.getLink();
             if (KeyHandler.isEnabled()) {
