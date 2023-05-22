@@ -23,18 +23,7 @@ public class WebServer {
 
     public static boolean start() {
         try {
-            int port = 0;
-            boolean invalid = false;
-            try {
-                port = Configs.reloadAndGet("config.yml").getConfig().getInt("port");
-            } catch (Exception e) {
-                invalid = true;
-            }
-            if (port < 0 || port > 65535) invalid = true;
-            if (invalid) {
-                WebDash.logger.warning("Invalid port in config.yml! Using default port 26666");
-                port = 26666;
-            }
+            int port = getPort();
             WebDash.logger.info("Starting server at port " + port);
 
             // start server
@@ -61,6 +50,19 @@ public class WebServer {
         }
     }
 
+    private static int getPort() {
+        try {
+            int port = Configs.reloadAndGet("config.yml").getConfig().getInt("port");
+            if (port < 0 || port > 65535) {
+                throw new Exception();
+            }
+            return port;
+        } catch (Exception e) {
+            WebDash.logger.warning("Invalid port in config.yml! Using default port 26666");
+            return 26666;
+        }
+    }
+
     public static void stop() {
         WebDash.logger.info("Stopping WebDash server!");
         server.stop(0);
@@ -68,7 +70,7 @@ public class WebServer {
     }
 
     public static String getBaseLink() {
-        int port = WebDash.plugin.getConfig().getInt("port");
+        int port = getPort();
         String ip = Bukkit.getIp();
         if (ip.equals("")) {
             ip = "localhost";
