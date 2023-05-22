@@ -116,15 +116,18 @@ public class WebDashCommand implements CommandExecutor {
                     sender.sendMessage(MessagesConfig.get("key-help"));
                     return true;
                 }
+
                 String subarg = args[1];
+                String openSuffix = sender instanceof Player ? MessagesConfig.get("player-open") : MessagesConfig.get("console-open");
+
                 if (subarg.equalsIgnoreCase("on")) {
                     if (KeyHandler.enableKey()) {
                         String link = WebServer.getLink();
-                        String message = MessagesConfig.get("key-on");
+                        String message = MessagesConfig.get("key-on") + openSuffix.formatted(link);
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         String link = WebServer.getLink();
-                        String message = MessagesConfig.get("key-already-on");
+                        String message = MessagesConfig.get("key-already-on") + openSuffix.formatted(link);
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -132,11 +135,11 @@ public class WebDashCommand implements CommandExecutor {
                 if (subarg.equalsIgnoreCase("off")) {
                     if (KeyHandler.disableKey()) {
                         String link = WebServer.getLink();
-                        String message = MessagesConfig.get("key-off");
+                        String message = MessagesConfig.get("key-off") + openSuffix.formatted(link);
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
                         String link = WebServer.getLink();
-                        String message = MessagesConfig.get("key-already-off");
+                        String message = MessagesConfig.get("key-already-off") + openSuffix.formatted(link);
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -145,10 +148,10 @@ public class WebDashCommand implements CommandExecutor {
                     KeyHandler.generateKey();
                     String link = WebServer.getLink();
                     if (KeyHandler.isEnabled()) {
-                        String message = MessagesConfig.get("key-reset");
+                        String message = MessagesConfig.get("key-reset") + openSuffix.formatted(link);
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     } else {
-                        String message = MessagesConfig.get("key-reset-off");
+                        String message = MessagesConfig.get("key-reset-off") + openSuffix.formatted(link);
                         PlayerUtil.sendClickableMessage(sender, message, link);
                     }
                     return true;
@@ -164,13 +167,16 @@ public class WebDashCommand implements CommandExecutor {
                     sender.sendMessage(MessagesConfig.get("not-running"));
                     return true;
                 }
+
+                String openSuffix = sender instanceof Player ? MessagesConfig.get("player-open") : MessagesConfig.get("console-open");
+
                 if (StatusHandler.enable()) {
                     String link = WebServer.getLink();
-                    String message = MessagesConfig.get("on-success");
+                    String message = MessagesConfig.get("on-success") + openSuffix.formatted(link);
                     PlayerUtil.sendClickableMessage(sender, message, link);
                 } else {
                     String link = WebServer.getLink();
-                    String message = MessagesConfig.get("on-already-on");
+                    String message = MessagesConfig.get("on-already-on") + openSuffix.formatted(link);
                     PlayerUtil.sendClickableMessage(sender, message, link);
                 }
                 return true;
