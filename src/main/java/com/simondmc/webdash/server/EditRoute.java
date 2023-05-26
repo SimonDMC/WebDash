@@ -18,7 +18,6 @@ public class EditRoute implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         // auth check
         if (AuthChecker.isUnauthorized(he)) return;
-
         // parse POST request
         InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
@@ -27,25 +26,36 @@ public class EditRoute implements HttpHandler {
         String response;
         int status;
 
-        // parse body
-        String id = body.split("§§§")[0];
-        String name = body.split("§§§")[1];
-        String command = body.split("§§§")[2];
-        String color = body.split("§§§")[3];
-
-        // edit route
-        Route route = RouteHandler.getRoute(id);
-
-        if (route == null) {
-            response = "Route not found";
-            status = 404;
+        if (body == null) {
+            // send 200 if preflight request
+            if (he.getRequestMethod().equals("OPTIONS")) {
+                response = "Preflight OK";
+                status = 200;
+            } else {
+                response = "Missing data";
+                status = 400;
+            }
         } else {
-            response = "Edited";
-            status = 200;
+            // parse body
+            String id = body.split("§§§")[0];
+            String name = body.split("§§§")[1];
+            String command = body.split("§§§")[2];
+            String color = body.split("§§§")[3];
 
-            route.setName(name);
-            route.setCommand(command);
-            route.setColor(color);
+            // edit route
+            Route route = RouteHandler.getRoute(id);
+
+            if (route == null) {
+                response = "Route not found";
+                status = 404;
+            } else {
+                response = "Edited";
+                status = 200;
+
+                route.setName(name);
+                route.setCommand(command);
+                route.setColor(color);
+            }
         }
 
         // save routes

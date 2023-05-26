@@ -25,11 +25,23 @@ public class SendRoute implements HttpHandler {
         InputStreamReader isr = new InputStreamReader(he.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
         String query = br.readLine();
-        // parse query
-        List<String> params = new ArrayList<>(List.of(query.split("&")));
 
         String response = "Send successful!";
         int status = 200;
+
+        // parse query
+        List<String> params;
+        if (query == null) {
+            params = new ArrayList<>();
+            if (he.getRequestMethod().equals("OPTIONS")) {
+                response = "Preflight OK";
+            } else {
+                response = "Missing data";
+                status = 400;
+            }
+        } else {
+            params = new ArrayList<>(List.of(query.split("&")));
+        }
 
         for (String id : params) {
             if (RouteHandler.getRoute(id) != null) {

@@ -27,33 +27,44 @@ public class DragRoute implements HttpHandler {
         String response = "OK";
         int status = 200;
 
-        // parse body
-        int from = Integer.parseInt(body.split("§§§")[0]);
-        int to = Integer.parseInt(body.split("§§§")[1]);
-
-        // set dragged route after reordering
-        Route route = RouteHandler.getRoute(from);
-
-        // reorder routes
-        if (from < to) {
-            for (int i = from + 1; i <= to; i++) {
-                RouteHandler.getRoute(i).setIndex(i - 1);
+        if (body == null) {
+            // send 200 if preflight request
+            if (he.getRequestMethod().equals("OPTIONS")) {
+                response = "Preflight OK";
+                status = 200;
+            } else {
+                response = "Missing data";
+                status = 400;
             }
         } else {
-            for (int i = from - 1; i >= to; i--) {
-                RouteHandler.getRoute(i).setIndex(i + 1);
+            // parse body
+            int from = Integer.parseInt(body.split("§§§")[0]);
+            int to = Integer.parseInt(body.split("§§§")[1]);
+
+            // set dragged route after reordering
+            Route route = RouteHandler.getRoute(from);
+
+            // reorder routes
+            if (from < to) {
+                for (int i = from + 1; i <= to; i++) {
+                    RouteHandler.getRoute(i).setIndex(i - 1);
+                }
+            } else {
+                for (int i = from - 1; i >= to; i--) {
+                    RouteHandler.getRoute(i).setIndex(i + 1);
+                }
             }
-        }
 
-        if (route == null) {
-            response = "Route not found";
-            status = 404;
-        } else {
-            route.setIndex(to);
-        }
+            if (route == null) {
+                response = "Route not found";
+                status = 404;
+            } else {
+                route.setIndex(to);
+            }
 
-        // save routes
-        RoutesConfig.saveRoutes();
+            // save routes
+            RoutesConfig.saveRoutes();
+        }
 
         // send response
         if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Origin", "*");

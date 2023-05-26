@@ -27,8 +27,13 @@ public class DeleteRoute implements HttpHandler {
         int status = 200;
 
         if (id == null) {
-            response = "No id provided";
-            // no 400 because pre-flight request would fail
+            // send 200 if preflight request
+            if (he.getRequestMethod().equals("OPTIONS")) {
+                response = "Preflight OK";
+            } else {
+                response = "Missing data";
+                status = 400;
+            }
         } else if (RouteHandler.removeRoute(id)) {
             response = "Route deleted successfully";
         } else {

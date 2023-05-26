@@ -26,13 +26,24 @@ public class AddRoute implements HttpHandler {
         String response = "Created";
         int status = 201;
 
-        // parse body
-        String name = body.split("§§§")[0];
-        String command = body.split("§§§")[1];
-        String color = body.split("§§§")[2];
+        if (body == null) {
+            // send 200 if preflight request
+            if (he.getRequestMethod().equals("OPTIONS")) {
+                response = "Preflight OK";
+                status = 200;
+            } else {
+                response = "Missing data";
+                status = 400;
+            }
+        } else {
+            // parse body
+            String name = body.split("§§§")[0];
+            String command = body.split("§§§")[1];
+            String color = body.split("§§§")[2];
 
-        // add route
-        RouteHandler.addRoute(new Route(name, command, color));
+            // add route
+            RouteHandler.addRoute(new Route(name, command, color));
+        }
 
         // send response
         if (!WebServer.CORS) he.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
