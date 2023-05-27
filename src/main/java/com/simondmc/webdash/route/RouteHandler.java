@@ -45,7 +45,7 @@ public class RouteHandler {
 
         int index = route.getIndex();
 
-        routes.remove(index);
+        routes.remove(route);
 
         for (Route routeToShift : getRoutes()) {
             int indexToShift = routeToShift.getIndex();
