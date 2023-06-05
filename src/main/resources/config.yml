@@ -7,9 +7,12 @@ port: 26666
 # run `/webdash restart` to apply changes
 
 
-# How often to refresh the button data (every x milliseconds)
-# Default: 500
-refresh-period: 500
+# The port to start the web socket server on
+# Default: 26667
+# IMPORTANT: This port must be open on your firewall
+# IMPORTANT: This port must be different from the web server port
+socket-port: 26667
+# run `/webdash restart` to apply changes
 
 
 # How many characters the dashboard protection key should be

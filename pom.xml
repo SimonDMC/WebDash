@@ -41,7 +41,7 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <outputFile>C:\Users\SimonDMCPlayer\Desktop\Spigot\plugins\WebDash.jar</outputFile>
+                            <outputFile>C:\Users\SimonDMC\Desktop\Spigot\plugins\WebDash.jar</outputFile>
                         </configuration>
                     </execution>
                 </executions>
@@ -72,6 +72,11 @@
             <artifactId>spigot-api</artifactId>
             <version>1.19.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.5.3</version>
         </dependency>
     </dependencies>
 </project>

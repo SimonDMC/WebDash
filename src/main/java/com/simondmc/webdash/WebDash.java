@@ -6,6 +6,7 @@ import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.config.DataConfig;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.config.RoutesConfig;
+import com.simondmc.webdash.websocket.WSSHandler;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,6 +42,9 @@ public final class WebDash extends JavaPlugin {
 
         // start web server
         WebServer.start();
+
+        // start socket server
+        WSSHandler.start();
     }
 
     @Override
@@ -48,5 +52,6 @@ public final class WebDash extends JavaPlugin {
         if (WebServer.isRunning()) {
             WebServer.stop();
         }
+        WSSHandler.stop();
     }
 }
