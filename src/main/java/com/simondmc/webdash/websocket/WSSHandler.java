@@ -2,14 +2,19 @@ package com.simondmc.webdash.websocket;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
+import com.simondmc.webdash.route.RouteHandler;
 import com.simondmc.webdash.util.ConsoleUtil;
 import org.bukkit.Bukkit;
+import org.java_websocket.WebSocket;
 
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WSSHandler {
     private static WebSocketServer server;
     private static boolean isRunning = false;
+    private static List<WebSocket> authenticatedSockets = new ArrayList<>();
     public static void start() {
         String host = getHost();
         int port = getPort();
@@ -36,7 +41,7 @@ public class WSSHandler {
         return host;
     }
 
-    private static int getPort() {
+    public static int getPort() {
         try {
             int port = Configs.reloadAndGet("config.yml").getConfig().getInt("socket-port");
             if (port < 0 || port > 65535) {
@@ -54,7 +59,9 @@ public class WSSHandler {
     }
 
     public static void send(String message) {
-        server.broadcast(message);
+        for (WebSocket socket : authenticatedSockets) {
+            socket.send(message);
+        }
     }
 
     public static void stop() {
@@ -65,6 +72,21 @@ public class WSSHandler {
             return;
         }
         isRunning = false;
+    }
+
+    public static void authConnection(WebSocket socket) {
+        authenticatedSockets.add(socket);
+        socket.send(RouteHandler.getJSON());
+    }
+
+    public static boolean isAuthed(WebSocket socket) {
+        return authenticatedSockets.contains(socket);
+    }
+
+    public static void closeAll() {
+        for (WebSocket socket : server.getConnections()) {
+            socket.close();
+        }
     }
 
     public static boolean isRunning() {

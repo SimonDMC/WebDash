@@ -2,6 +2,7 @@ package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.dashboard.StatusHandler;
+import com.simondmc.webdash.websocket.WSSHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -42,6 +43,7 @@ public class MainDashboard implements HttpHandler {
         }
 
         String fileData = new String(is.readAllBytes());
+        fileData = fileData.replace("%WEBSOCKET_PORT%", String.valueOf(WSSHandler.getPort()));
         he.sendResponseHeaders(200, fileData.getBytes().length);
         OutputStream os = he.getResponseBody();
         os.write(fileData.getBytes());

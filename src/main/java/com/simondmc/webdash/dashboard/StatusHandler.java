@@ -1,6 +1,7 @@
 package com.simondmc.webdash.dashboard;
 
 import com.simondmc.webdash.config.DataConfig;
+import com.simondmc.webdash.websocket.WSSHandler;
 
 public class StatusHandler {
 
@@ -16,6 +17,10 @@ public class StatusHandler {
 
         enabled = true;
         DataConfig.setEnabled(true);
+
+        // close all connections
+        WSSHandler.closeAll();
+
         return true;
     }
 
@@ -25,6 +30,9 @@ public class StatusHandler {
 
         enabled = false;
         DataConfig.setEnabled(false);
+
+        // close all connections
+        WSSHandler.closeAll();
 
         return true;
     }

@@ -3,7 +3,7 @@ package com.simondmc.webdash.dashboard;
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.config.DataConfig;
-import com.simondmc.webdash.dashboard.KeyGenerator;
+import com.simondmc.webdash.websocket.WSSHandler;
 
 public class KeyHandler {
 
@@ -25,6 +25,9 @@ public class KeyHandler {
         // generate key if doesn't exist
         if (key == null) generateKey();
 
+        // close all connections
+        WSSHandler.closeAll();
+
         return true;
     }
 
@@ -34,6 +37,9 @@ public class KeyHandler {
 
         enabled = false;
         DataConfig.setKeyEnabled(false);
+
+        // close all connections
+        WSSHandler.closeAll();
 
         return true;
     }

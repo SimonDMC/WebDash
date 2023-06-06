@@ -1,5 +1,6 @@
 package com.simondmc.webdash.websocket.generic;
 
+import com.simondmc.webdash.websocket.WSSHandler;
 import com.simondmc.webdash.websocket.handlers.*;
 import org.java_websocket.WebSocket;
 
@@ -8,6 +9,9 @@ public class IncomingSocketHandler {
         SpecificIncomingSocketHandler handler;
         String handlerName = message.split("§§§")[0];
         String handlerMessage = message.substring(handlerName.length() + 3);
+
+        // if connection is not authenticated only allow auth request
+        if (!WSSHandler.isAuthed(conn) && !handlerName.equals("auth")) return;
 
         switch (handlerName) {
             case "add":
@@ -24,6 +28,9 @@ public class IncomingSocketHandler {
                 break;
             case "press":
                 handler = new PressHandler();
+                break;
+            case "auth":
+                handler = new AuthHandler();
                 break;
             default:
                 return;

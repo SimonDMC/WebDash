@@ -1,6 +1,7 @@
 package com.simondmc.webdash.websocket;
 
-import com.simondmc.webdash.route.RouteHandler;
+import com.simondmc.webdash.dashboard.KeyHandler;
+import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.websocket.generic.IncomingSocketHandler;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -15,32 +16,23 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        conn.send(RouteHandler.getJSON());
-        //System.out.println("new connection to " + conn.getRemoteSocketAddress());
+        // if key is disabled and WebDash isn't off, allow connection
+        if (!KeyHandler.isEnabled() && StatusHandler.isEnabled()) {
+            WSSHandler.authConnection(conn);
+        }
     }
 
     @Override
-    public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        //System.out.println("closed " + conn.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
-    }
+    public void onClose(WebSocket conn, int code, String reason, boolean remote) {}
 
     @Override
     public void onMessage(WebSocket conn, String message) {
         IncomingSocketHandler.handle(conn, message);
     }
 
-    /*@Override
-    public void onMessage( WebSocket conn, ByteBuffer message ) {
-        System.out.println("received ByteBuffer from "	+ conn.getRemoteSocketAddress());
-    }*/
+    @Override
+    public void onError(WebSocket conn, Exception ex) {}
 
     @Override
-    public void onError(WebSocket conn, Exception ex) {
-        //System.err.println("an error occurred on connection " + conn.getRemoteSocketAddress()  + ":" + ex);
-    }
-
-    @Override
-    public void onStart() {
-        //System.out.println("server started successfully");
-    }
+    public void onStart() {}
 }
