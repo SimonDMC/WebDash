@@ -1,7 +1,6 @@
 name: WebDash
 version: '${project.version}'
 main: com.simondmc.webdash.WebDash
-api-version: 1.19
 author: SimonDMC
 description: A Web Dashboard for your Minecraft server
 website: simondmc.com

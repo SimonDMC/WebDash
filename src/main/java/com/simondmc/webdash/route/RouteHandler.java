@@ -1,6 +1,7 @@
 package com.simondmc.webdash.route;
 
 import com.simondmc.webdash.config.RoutesConfig;
+import com.simondmc.webdash.websocket.WSSHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,9 @@ public class RouteHandler {
     public static void addRoute(Route route) {
         routes.add(route);
         RoutesConfig.saveRoutes();
+
+        // broadcast changes
+        WSSHandler.send(RouteHandler.getJSON());
     }
 
     public static List<Route> getRoutes() {
@@ -55,6 +59,9 @@ public class RouteHandler {
         }
 
         RoutesConfig.saveRoutes();
+
+        // broadcast changes
+        WSSHandler.send(RouteHandler.getJSON());
 
         return true;
     }
