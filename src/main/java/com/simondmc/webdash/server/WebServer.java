@@ -10,9 +10,6 @@ import org.bukkit.Bukkit;
 import java.net.InetSocketAddress;
 
 public class WebServer {
-
-    public static boolean CORS = false;
-
     private static HttpServer server;
 
     private static boolean running = false;

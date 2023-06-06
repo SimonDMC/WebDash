@@ -2,8 +2,6 @@ package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.dashboard.StatusHandler;
-import com.simondmc.webdash.route.Route;
-import com.simondmc.webdash.route.RouteHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -13,15 +11,6 @@ import java.io.OutputStream;
 import java.util.List;
 
 public class MainDashboard implements HttpHandler {
-
-    private String getButtons() {
-        StringBuilder sb = new StringBuilder();
-        for (String id : RouteHandler.getRoutes().stream().map(Route::getId).toList()) {
-            sb.append("<button onclick=\"send('").append(id).append("')\">").append(id).append("</button>");
-        }
-        return sb.toString();
-    }
-
     @Override
     public void handle(HttpExchange he) throws IOException {
         String query = he.getRequestURI().getQuery();
@@ -53,7 +42,6 @@ public class MainDashboard implements HttpHandler {
         }
 
         String fileData = new String(is.readAllBytes());
-        fileData = fileData.replace("%buttons%", getButtons());
         he.sendResponseHeaders(200, fileData.getBytes().length);
         OutputStream os = he.getResponseBody();
         os.write(fileData.getBytes());

@@ -15,7 +15,7 @@ public class WebDashCommand implements CommandExecutor {
 
             String subcommand = args[0].toLowerCase();
 
-            if (subcommand.equals("add")) {
+            if (subcommand.equals("add") || subcommand.equals("a")) {
                 new WebDashAddSubcommand(sender, args);
                 return true;
             }
@@ -25,7 +25,7 @@ public class WebDashCommand implements CommandExecutor {
                 return true;
             }
 
-            if (subcommand.equals("list")) {
+            if (subcommand.equals("list") || subcommand.equals("ls")) {
                 new WebDashListSubcommand(sender);
                 return true;
             }
