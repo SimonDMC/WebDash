@@ -22,11 +22,11 @@ public class WebDashKeySubcommand {
         if (subarg.equals("on") || subarg.equals("enable")) {
             if (KeyHandler.enableKey()) {
                 String link = WebServer.getLink();
-                String message = MessagesConfig.get("key-on") + openSuffix.formatted(link);
+                String message = MessagesConfig.get("key-on") + String.format(openSuffix, link);
                 PlayerUtil.sendClickableMessage(sender, message, link);
             } else {
                 String link = WebServer.getLink();
-                String message = MessagesConfig.get("key-already-on") + openSuffix.formatted(link);
+                String message = MessagesConfig.get("key-already-on") + String.format(openSuffix, link);
                 PlayerUtil.sendClickableMessage(sender, message, link);
             }
             return;
@@ -34,11 +34,11 @@ public class WebDashKeySubcommand {
         if (subarg.equals("off") || subarg.equals("disable")) {
             if (KeyHandler.disableKey()) {
                 String link = WebServer.getLink();
-                String message = MessagesConfig.get("key-off") + openSuffix.formatted(link);
+                String message = MessagesConfig.get("key-off") + String.format(openSuffix, link);
                 PlayerUtil.sendClickableMessage(sender, message, link);
             } else {
                 String link = WebServer.getLink();
-                String message = MessagesConfig.get("key-already-off") + openSuffix.formatted(link);
+                String message = MessagesConfig.get("key-already-off") + String.format(openSuffix, link);
                 PlayerUtil.sendClickableMessage(sender, message, link);
             }
             return;
@@ -47,10 +47,10 @@ public class WebDashKeySubcommand {
             KeyHandler.generateKey();
             String link = WebServer.getLink();
             if (KeyHandler.isEnabled()) {
-                String message = MessagesConfig.get("key-reset") + openSuffix.formatted(link);
+                String message = MessagesConfig.get("key-reset") + String.format(openSuffix, link);
                 PlayerUtil.sendClickableMessage(sender, message, link);
             } else {
-                String message = MessagesConfig.get("key-reset-off") + openSuffix.formatted(link);
+                String message = MessagesConfig.get("key-reset-off") + String.format(openSuffix, link);
                 PlayerUtil.sendClickableMessage(sender, message, link);
             }
             return;

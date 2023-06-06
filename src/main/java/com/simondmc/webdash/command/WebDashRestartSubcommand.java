@@ -1,7 +1,6 @@
 package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.config.MessagesConfig;
-import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.server.WebServer;
 import com.simondmc.webdash.util.PlayerUtil;
 import org.bukkit.command.CommandSender;
@@ -18,7 +17,7 @@ public class WebDashRestartSubcommand {
         if (success) {
             String link = WebServer.getLink();
             String baseLink = WebServer.getBaseLink();
-            String message = MessagesConfig.get("restart-success").formatted(baseLink);
+            String message = String.format(MessagesConfig.get("restart-success"), baseLink);
             if (sender instanceof Player) {
                 PlayerUtil.sendClickableMessage(sender, message, link);
             } else {

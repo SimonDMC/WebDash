@@ -3,7 +3,6 @@ package com.simondmc.webdash.command;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
-import com.simondmc.webdash.util.StringUtil;
 import org.bukkit.command.CommandSender;
 
 public class WebDashRemoveSubcommand {
@@ -19,9 +18,9 @@ public class WebDashRemoveSubcommand {
         Route route = RouteHandler.getRoute(id);
 
         if (RouteHandler.removeRoute(id)) {
-            sender.sendMessage(MessagesConfig.get("remove-success").formatted(route.getName()));
+            sender.sendMessage(String.format(MessagesConfig.get("remove-success"), route.getName(), route.getCommand()));
         } else {
-            sender.sendMessage(MessagesConfig.get("remove-fail").formatted(id));
+            sender.sendMessage(String.format(MessagesConfig.get("remove-fail"), id));
         }
     }
 }

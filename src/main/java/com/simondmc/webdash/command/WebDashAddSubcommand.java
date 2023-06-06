@@ -17,7 +17,7 @@ public class WebDashAddSubcommand {
             sender.sendMessage(MessagesConfig.get("add-help"));
             return;
         }
-        sender.sendMessage(MessagesConfig.get("add-success").formatted(name, command));
+        sender.sendMessage(String.format(MessagesConfig.get("add-success"), name, command));
         RouteHandler.addRoute(new Route(name, command));
     }
 }

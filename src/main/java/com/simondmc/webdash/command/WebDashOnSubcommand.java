@@ -1,7 +1,6 @@
 package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.config.MessagesConfig;
-import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.server.WebServer;
 import com.simondmc.webdash.util.PlayerUtil;
@@ -21,11 +20,11 @@ public class WebDashOnSubcommand {
 
         if (StatusHandler.enable()) {
             String link = WebServer.getLink();
-            String message = MessagesConfig.get("on-success") + openSuffix.formatted(link);
+            String message = MessagesConfig.get("on-success") + String.format(openSuffix, link);
             PlayerUtil.sendClickableMessage(sender, message, link);
         } else {
             String link = WebServer.getLink();
-            String message = MessagesConfig.get("on-already-on") + openSuffix.formatted(link);
+            String message = MessagesConfig.get("on-already-on") + String.format(openSuffix, link);
             PlayerUtil.sendClickableMessage(sender, message, link);
         }
     }

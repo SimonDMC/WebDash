@@ -18,7 +18,7 @@ public class WebDashListSubcommand {
         }
         sender.sendMessage(MessagesConfig.get("list-header"));
         for (Route route : routes) {
-            sender.sendMessage(MessagesConfig.get("list-item").formatted(route.getName(), route.getCommand()));
+            sender.sendMessage(String.format(MessagesConfig.get("list-item"), route.getName(), route.getCommand()));
         }
     }
 }

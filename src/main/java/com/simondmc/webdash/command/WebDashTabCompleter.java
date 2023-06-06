@@ -48,7 +48,7 @@ public class WebDashTabCompleter implements TabCompleter {
 
         // key subcommand
         if (args.length == 2 && args[0].equalsIgnoreCase("key")) {
-            List<String> list = new ArrayList<>(Arrays.asList("set", "remove"));
+            List<String> list = Arrays.asList("on", "off", "reset");
             List<String> arguments = new ArrayList<>(list);
             // remove current on/off setting
             if (KeyHandler.isEnabled()) {

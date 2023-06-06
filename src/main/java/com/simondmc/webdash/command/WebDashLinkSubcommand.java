@@ -2,14 +2,10 @@ package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.dashboard.KeyHandler;
-import com.simondmc.webdash.route.Route;
-import com.simondmc.webdash.route.RouteHandler;
 import com.simondmc.webdash.server.WebServer;
 import com.simondmc.webdash.util.PlayerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.List;
 
 public class WebDashLinkSubcommand {
 
@@ -21,7 +17,7 @@ public class WebDashLinkSubcommand {
         }
         String link = WebServer.getLink();
         String baseLink = WebServer.getBaseLink();
-        String message = MessagesConfig.get("link-success").formatted(sender instanceof Player ? baseLink : link);
+        String message = String.format(MessagesConfig.get("link-success"), sender instanceof Player ? baseLink : link);
         if (KeyHandler.isEnabled() && sender instanceof Player) {
             message += MessagesConfig.get("link-key-suffix");
         }
