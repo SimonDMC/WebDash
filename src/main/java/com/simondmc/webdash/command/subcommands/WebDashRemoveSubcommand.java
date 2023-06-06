@@ -1,14 +1,16 @@
-package com.simondmc.webdash.command;
+package com.simondmc.webdash.command.subcommands;
 
+import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import org.bukkit.command.CommandSender;
 
-public class WebDashRemoveSubcommand {
+public class WebDashRemoveSubcommand implements WebDashSubcommand {
 
     /* /webdash remove <id> */
-    public WebDashRemoveSubcommand(CommandSender sender, String[] args) {
+    @Override
+    public void execute(CommandSender sender, String[] args) {
         if (args.length < 2) {
             sender.sendMessage(MessagesConfig.get("remove-help"));
             return;

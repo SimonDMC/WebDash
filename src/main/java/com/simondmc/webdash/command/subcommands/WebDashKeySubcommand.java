@@ -1,5 +1,6 @@
-package com.simondmc.webdash.command;
+package com.simondmc.webdash.command.subcommands;
 
+import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.server.WebServer;
@@ -7,10 +8,11 @@ import com.simondmc.webdash.util.PlayerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class WebDashKeySubcommand {
+public class WebDashKeySubcommand implements WebDashSubcommand {
 
     /* /webdash key <on/off/reset> */
-    public WebDashKeySubcommand(CommandSender sender, String[] args) {
+    @Override
+    public void execute(CommandSender sender, String[] args) {
         if (args.length < 2) {
             sender.sendMessage(MessagesConfig.get("key-help"));
             return;

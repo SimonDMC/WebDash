@@ -1,5 +1,6 @@
-package com.simondmc.webdash.command;
+package com.simondmc.webdash.command.subcommands;
 
+import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.server.WebServer;
@@ -7,10 +8,11 @@ import com.simondmc.webdash.util.PlayerUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class WebDashOnSubcommand {
+public class WebDashOnSubcommand implements WebDashSubcommand {
 
     /* /webdash on */
-    public WebDashOnSubcommand(CommandSender sender) {
+    @Override
+    public void execute(CommandSender sender, String[] args) {
         if (!WebServer.isRunning()) {
             sender.sendMessage(MessagesConfig.get("not-running"));
             return;
