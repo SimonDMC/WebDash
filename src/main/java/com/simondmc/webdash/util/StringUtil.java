@@ -50,12 +50,19 @@ public class StringUtil {
      * @return The generated id.
      */
     public static String generateId(String name) {
-        String id = name.replaceAll(" ", "_")/*1*/.replaceAll("[^a-zA-Z0-9]", "")/*2*/.toLowerCase();/*3*/
+        // 1. All spaces are replaced with underscores
+        String id = name.replaceAll("\\s+", "_");
+        // 2. All non-alphanumeric characters are removed
+        id = id.replaceAll("[^a-zA-Z0-9_]", "");
+        // 3. All letters are converted to lowercase
+        id = id.toLowerCase();
+        // 4. If id is empty, set it to an underscore
         if (id.isEmpty()) {
-            id = "_";/*4*/
+            id = "_";
         }
+        // 5. If id already exists (RouteHandler.get(id) != null), add an underscore to the end
         while (RouteHandler.getRoute(id) != null) {
-            id += "_";/*5*/
+            id += "_";
         }
         return id;
     }
