@@ -2,10 +2,7 @@ package com.simondmc.webdash;
 
 import com.simondmc.webdash.command.WebDashCommand;
 import com.simondmc.webdash.command.WebDashTabCompleter;
-import com.simondmc.webdash.config.Configs;
-import com.simondmc.webdash.config.DataConfig;
-import com.simondmc.webdash.config.MessagesConfig;
-import com.simondmc.webdash.config.RoutesConfig;
+import com.simondmc.webdash.config.*;
 import com.simondmc.webdash.websocket.WSSHandler;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,13 +29,20 @@ public final class WebDash extends JavaPlugin {
         Configs.add("config.yml");
 
         // init routes config
+        // this config stores buttons/routes added by players
         RoutesConfig.init();
 
         // init data config
+        // this config stores key data and on/off status
         DataConfig.init();
 
         // init messages config
+        // this config is used as a language file
         MessagesConfig.init();
+
+        // init version config
+        // this config stores the current version of the plugin for access by info message
+        VersionConfig.init();
 
         // start web server
         WebServer.start();

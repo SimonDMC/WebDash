@@ -1,6 +1,7 @@
 package com.simondmc.webdash.command;
 
 import com.simondmc.webdash.command.subcommands.*;
+import com.simondmc.webdash.config.VersionConfig;
 import com.simondmc.webdash.util.PlayerUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,7 +13,7 @@ public class WebDashCommand implements CommandExecutor {
         if (cmd.getName().equals("webdash")) {
             if (args.length == 0) {
                 sender.sendMessage("§6§l§m---------------------------------------------");
-                PlayerUtil.sendCenteredMessage(sender, "§b§lWebDash");
+                PlayerUtil.sendCenteredMessage(sender, "§b§lWebDash §7v" + VersionConfig.getVersion());
                 PlayerUtil.sendCenteredMessage(sender, "");
                 PlayerUtil.sendCenteredMessage(sender, "§3An easy and convenient web dashboard for");
                 PlayerUtil.sendCenteredMessage(sender, "§3managing your Minecraft server.");

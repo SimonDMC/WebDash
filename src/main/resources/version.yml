@@ -1,0 +1,6 @@
+# WebDash Version
+
+# NOTE: This file gets overwritten every time the plugin is reloaded or the server is restarted.
+# Any changes made to this file will be lost.
+
+version: ${project.version}
