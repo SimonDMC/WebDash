@@ -62,6 +62,11 @@ public class KeyHandler {
         KeyGenerator keygen = new KeyGenerator(length);
         key = keygen.getKey();
         DataConfig.setKey(key);
+
+        // close all connections if key is enabled
+        if (enabled) {
+            WSSHandler.closeAll();
+        }
     }
 
     public static boolean isEnabled() {
