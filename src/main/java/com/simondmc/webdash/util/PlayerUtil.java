@@ -29,7 +29,7 @@ public class PlayerUtil {
         boolean isBold = false;
 
         for (char c : message.toCharArray()) {
-            if (c == '§'){
+            if (c == '§') {
                 previousCode = true;
             } else if (previousCode) {
                 previousCode = false;
@@ -46,12 +46,12 @@ public class PlayerUtil {
         int spaceLength = DefaultFontInfo.SPACE.getLength() + 1;
         int compensated = 0;
         StringBuilder sb = new StringBuilder();
-        while(compensated < toCompensate){
+        while (compensated < toCompensate) {
             sb.append(" ");
             compensated += spaceLength;
         }
         // messes up in newer version so compensate manually
-        sb.append("   ");
+        sb.append("  ");
         return sb + message;
     }
 }
