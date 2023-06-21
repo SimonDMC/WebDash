@@ -12,14 +12,18 @@ public class PlayerUtil {
         sender.spigot().sendMessage(textComponent);
     }
 
+    public static void sendCommandSuggestingMessage(CommandSender sender, String message, String command) {
+        TextComponent textComponent = new TextComponent(message);
+        textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
+        sender.spigot().sendMessage(textComponent);
+    }
+
     public static void sendCenteredMessage(CommandSender sender, String message) {
         sender.sendMessage(getCenteredMessage(message));
     }
 
     public static void sendCenteredMessage(CommandSender sender, String message, String command) {
-        TextComponent textComponent = new TextComponent(getCenteredMessage(message));
-        textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
-        sender.spigot().sendMessage(textComponent);
+        sendCommandSuggestingMessage(sender, getCenteredMessage(message), command);
     }
 
     private static String getCenteredMessage(String message) {

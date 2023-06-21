@@ -7,11 +7,11 @@ website: simondmc.com
 
 commands:
   webdash:
-    usage: "§cUsage: /<command> <add/remove/list/link/restart/key/on/off>"
-    aliases: [wd]
+    usage: "§cUsage: /<command> <add/remove/list/link/restart/key/on/off/help>"
+    aliases: [ wd ]
     permission: webdash.command
     permission-message: §cYou do not have permission to use this command.
 permissions:
-    webdash.command:
-        description: Gives access to the WebDash command
-        default: op
+  webdash.command:
+    description: Gives access to the WebDash command
+    default: op
