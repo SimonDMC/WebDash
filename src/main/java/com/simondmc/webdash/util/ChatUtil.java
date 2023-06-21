@@ -2,9 +2,10 @@ package com.simondmc.webdash.util;
 
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-public class PlayerUtil {
+public class ChatUtil {
 
     public static void sendClickableMessage(CommandSender sender, String message, String link) {
         TextComponent textComponent = new TextComponent(message);
@@ -57,5 +58,9 @@ public class PlayerUtil {
         // messes up in newer version so compensate manually
         sb.append("  ");
         return sb + message;
+    }
+
+    public static void sendColored(String message) {
+        Bukkit.getServer().getConsoleSender().sendMessage(message);
     }
 }

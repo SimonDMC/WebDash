@@ -3,7 +3,7 @@ package com.simondmc.webdash.websocket;
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.route.RouteHandler;
-import com.simondmc.webdash.util.ConsoleUtil;
+import com.simondmc.webdash.util.ChatUtil;
 import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
 
@@ -14,7 +14,8 @@ import java.util.List;
 public class WSSHandler {
     private static WebSocketServer server;
     private static boolean isRunning = false;
-    private static List<WebSocket> authenticatedSockets = new ArrayList<>();
+    private static final List<WebSocket> authenticatedSockets = new ArrayList<>();
+
     public static void start() {
         String host = getHost();
         int port = getPort();
@@ -27,10 +28,10 @@ public class WSSHandler {
             socketThread.start();
         } catch (Exception e) {
             e.printStackTrace();
-            ConsoleUtil.sendColored("§cFailed to start WebDash socket server at " + getLink());
+            ChatUtil.sendColored("§cFailed to start WebDash socket server at " + getLink());
         }
         isRunning = true;
-        ConsoleUtil.sendColored("§aWebDash socket server started at " + getLink());
+        ChatUtil.sendColored("§aWebDash socket server started at " + getLink());
     }
 
     private static String getHost() {
@@ -67,8 +68,7 @@ public class WSSHandler {
     public static void stop() {
         try {
             server.stop();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return;
         }
         isRunning = false;

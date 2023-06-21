@@ -4,7 +4,7 @@ import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.server.WebServer;
-import com.simondmc.webdash.util.PlayerUtil;
+import com.simondmc.webdash.util.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -23,6 +23,6 @@ public class WebDashLinkSubcommand implements WebDashSubcommand {
         if (KeyHandler.isEnabled() && sender instanceof Player) {
             message += MessagesConfig.get("link-key-suffix");
         }
-        PlayerUtil.sendClickableMessage(sender, message, link);
+        ChatUtil.sendClickableMessage(sender, message, link);
     }
 }

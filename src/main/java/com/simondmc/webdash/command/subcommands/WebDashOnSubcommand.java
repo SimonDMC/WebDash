@@ -4,7 +4,7 @@ import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.server.WebServer;
-import com.simondmc.webdash.util.PlayerUtil;
+import com.simondmc.webdash.util.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -23,11 +23,11 @@ public class WebDashOnSubcommand implements WebDashSubcommand {
         if (StatusHandler.enable()) {
             String link = WebServer.getLink();
             String message = MessagesConfig.get("on-success") + String.format(openSuffix, link);
-            PlayerUtil.sendClickableMessage(sender, message, link);
+            ChatUtil.sendClickableMessage(sender, message, link);
         } else {
             String link = WebServer.getLink();
             String message = MessagesConfig.get("on-already-on") + String.format(openSuffix, link);
-            PlayerUtil.sendClickableMessage(sender, message, link);
+            ChatUtil.sendClickableMessage(sender, message, link);
         }
     }
 }

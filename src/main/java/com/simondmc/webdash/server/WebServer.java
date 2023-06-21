@@ -3,7 +3,7 @@ package com.simondmc.webdash.server;
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;
 import com.simondmc.webdash.dashboard.KeyHandler;
-import com.simondmc.webdash.util.ConsoleUtil;
+import com.simondmc.webdash.util.ChatUtil;
 import com.sun.net.httpserver.HttpServer;
 import org.bukkit.Bukkit;
 
@@ -30,11 +30,11 @@ public class WebServer {
             server.start();
             running = true;
             // send with color
-            ConsoleUtil.sendColored("§aWebDash server started at " + getBaseLink());
+            ChatUtil.sendColored("§aWebDash server started at " + getBaseLink());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            ConsoleUtil.sendColored("§cFailed to start WebDash server at " + getBaseLink());
+            ChatUtil.sendColored("§cFailed to start WebDash server at " + getBaseLink());
             return false;
         }
     }
