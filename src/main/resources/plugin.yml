@@ -7,7 +7,7 @@ website: simondmc.com
 
 commands:
   webdash:
-    usage: "§cUsage: /<command> <add/remove/list/link/restart/key/on/off/help>"
+    usage: "§cInvalid usage! Check §e/webdash help §cfor more information."
     aliases: [ wd ]
     permission: webdash.command
     permission-message: §cYou do not have permission to use this command.
