@@ -86,6 +86,10 @@ public class WSSHandler {
         return authenticatedSockets.contains(socket);
     }
 
+    public static void removeConnection(WebSocket socket) {
+        authenticatedSockets.remove(socket);
+    }
+
     public static void closeAll() {
         for (WebSocket socket : server.getConnections()) {
             socket.close();

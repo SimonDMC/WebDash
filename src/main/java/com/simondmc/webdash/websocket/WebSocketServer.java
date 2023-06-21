@@ -23,7 +23,9 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
     @Override
-    public void onClose(WebSocket conn, int code, String reason, boolean remote) {}
+    public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+        WSSHandler.removeConnection(conn);
+    }
 
     @Override
     public void onMessage(WebSocket conn, String message) {
@@ -31,8 +33,10 @@ public class WebSocketServer extends org.java_websocket.server.WebSocketServer {
     }
 
     @Override
-    public void onError(WebSocket conn, Exception ex) {}
+    public void onError(WebSocket conn, Exception ex) {
+    }
 
     @Override
-    public void onStart() {}
+    public void onStart() {
+    }
 }
