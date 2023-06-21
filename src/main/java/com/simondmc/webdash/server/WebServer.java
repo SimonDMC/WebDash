@@ -53,7 +53,7 @@ public class WebServer {
     }
 
     public static void stop() {
-        WebDash.logger.info("Stopping WebDash server!");
+        WebDash.logger.info("Stopping web server!");
         server.stop(0);
         running = false;
     }

@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WSSHandler {
+    private static final List<WebSocket> authenticatedSockets = new ArrayList<>();
     private static WebSocketServer server;
     private static boolean isRunning = false;
-    private static final List<WebSocket> authenticatedSockets = new ArrayList<>();
 
-    public static void start() {
+    public static boolean start() {
         String host = getHost();
         int port = getPort();
 
@@ -29,9 +29,11 @@ public class WSSHandler {
         } catch (Exception e) {
             e.printStackTrace();
             ChatUtil.sendColored("§cFailed to start WebDash socket server at " + getLink());
+            return false;
         }
         isRunning = true;
         ChatUtil.sendColored("§aWebDash socket server started at " + getLink());
+        return true;
     }
 
     private static String getHost() {
@@ -66,6 +68,7 @@ public class WSSHandler {
     }
 
     public static void stop() {
+        WebDash.logger.info("Stopping socket server!");
         try {
             server.stop();
         } catch (Exception e) {
