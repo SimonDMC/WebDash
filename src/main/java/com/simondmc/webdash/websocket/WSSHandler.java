@@ -72,8 +72,7 @@ public class WSSHandler {
         try {
             server.stop();
         } catch (Exception e) {
-            // temporary debugging measure
-            throw new RuntimeException(e);
+            return;
         }
         isRunning = false;
     }
@@ -99,5 +98,9 @@ public class WSSHandler {
 
     public static boolean isRunning() {
         return isRunning;
+    }
+
+    public static void markAsNotRunning() {
+        isRunning = false;
     }
 }
