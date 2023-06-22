@@ -1,14 +1,17 @@
 package com.simondmc.webdash.server;
 
+import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.dashboard.KeyHandler;
 import com.simondmc.webdash.dashboard.StatusHandler;
 import com.simondmc.webdash.websocket.WSSHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.List;
 
 public class MainDashboard implements HttpHandler {
@@ -33,6 +36,16 @@ public class MainDashboard implements HttpHandler {
 
         String path = he.getRequestURI().getPath();
 
+        // serve images from plugin folder
+        if (path.endsWith(".png") || path.endsWith(".ico")) {
+            File file = new File(WebDash.plugin.getDataFolder() + "/dash" + path);
+            he.sendResponseHeaders(200, file.length());
+            OutputStream os = he.getResponseBody();
+            Files.copy(file.toPath(), os);
+            os.close();
+            return;
+        }
+
         // try to get file from resources/dash, if not found, use default path
         if (path.equals("/")) {
             path = defaultPath;
@@ -44,6 +57,7 @@ public class MainDashboard implements HttpHandler {
 
         String fileData = new String(is.readAllBytes());
         fileData = fileData.replace("%WEBSOCKET_PORT%", String.valueOf(WSSHandler.getPort()));
+        fileData = fileData.replace("%START_URL%", WebServer.getBaseLink());
         he.sendResponseHeaders(200, fileData.getBytes().length);
         OutputStream os = he.getResponseBody();
         os.write(fileData.getBytes());

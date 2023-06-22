@@ -25,6 +25,9 @@ public final class WebDash extends JavaPlugin {
         getCommand("webdash").setTabCompleter(new WebDashTabCompleter());
         getCommand("wd").setTabCompleter(new WebDashTabCompleter());
 
+        // copy over necessary images
+        saveImages();
+
         // init main config
         Configs.add("config.yml");
 
@@ -57,5 +60,11 @@ public final class WebDash extends JavaPlugin {
             WebServer.stop();
         }
         WSSHandler.stop();
+    }
+
+    void saveImages() {
+        saveResource("dash/favicon.ico", true);
+        saveResource("dash/icon-192.png", true);
+        saveResource("dash/icon-512.png", true);
     }
 }

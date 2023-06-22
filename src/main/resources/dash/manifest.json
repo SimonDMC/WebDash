@@ -1,0 +1,28 @@
+{
+    "name": "WebDash",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "32x32",
+            "type": "image/x-icon",
+            "purpose": "any"
+        },
+        {
+            "src": "icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any"
+        },
+        {
+            "src": "icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        }
+    ],
+    "id": "com.simondmc.webdash",
+    "start_url": "%START_URL%",
+    "display": "standalone",
+    "theme_color": "#232c35",
+    "background_color": "#232c35"
+}
