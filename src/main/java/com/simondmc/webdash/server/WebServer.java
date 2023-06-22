@@ -25,7 +25,7 @@ public class WebServer {
 
             // start server
             server = HttpServer.create(new InetSocketAddress(port), 0);
-            server.createContext("/", new MainDashboard());
+            server.createContext("/", new StaticFileServer());
             server.setExecutor(null);
             server.start();
             running = true;

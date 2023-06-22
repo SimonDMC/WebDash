@@ -72,7 +72,8 @@ public class WSSHandler {
         try {
             server.stop();
         } catch (Exception e) {
-            return;
+            // temporary debugging measure
+            throw new RuntimeException(e);
         }
         isRunning = false;
     }
