@@ -20,6 +20,6 @@ public class WebDashHelpSubcommand implements WebDashSubcommand {
         ChatUtil.sendCommandSuggestingMessage(sender, "§a/webdash add <key> /<command>§r: Adds a WebDash button", "/webdash add");
         ChatUtil.sendCommandSuggestingMessage(sender, "§a/webdash remove <id>§r: Removes a WebDash button by its ID §7(if you're unsure of the button ID, remove it through the dashboard)", "/webdash remove");
         ChatUtil.sendCommandSuggestingMessage(sender, "§a/webdash list§r: Lists all WebDash buttons", "/webdash list");
-        ChatUtil.sendCommandSuggestingMessage(sender, "§a/webdash notify§r: Toggles receiving notifications §7(such as a button being added or dashboard key being reset)", "/webdash notify");
+        ChatUtil.sendCommandSuggestingMessage(sender, "§a/webdash notify [player]§r: Toggles receiving notifications §7(such as a button being added or dashboard key being reset)", "/webdash notify");
     }
 }

@@ -64,6 +64,11 @@ public class WebDashTabCompleter implements TabCompleter {
             return arguments;
         }
 
+        // autocomplete player names if in notify subcommand
+        if (args.length == 2 && args[0].equalsIgnoreCase("notify")) {
+            return null;
+        }
+
         // make sure it doesn't autocomplete player names
         return new ArrayList<>();
     }
