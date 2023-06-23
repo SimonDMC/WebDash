@@ -3,6 +3,7 @@ package com.simondmc.webdash.command.subcommands;
 import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
 import com.simondmc.webdash.data.KeyHandler;
+import com.simondmc.webdash.data.NotificationHandler;
 import com.simondmc.webdash.server.WebServer;
 import com.simondmc.webdash.util.ChatUtil;
 import org.bukkit.command.CommandSender;
@@ -26,6 +27,9 @@ public class WebDashKeySubcommand implements WebDashSubcommand {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-on") + String.format(openSuffix, link);
                 ChatUtil.sendClickableMessage(sender, message, link);
+
+                // notify
+                NotificationHandler.notifyKeyOn();
             } else {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-already-on") + String.format(openSuffix, link);
@@ -38,6 +42,9 @@ public class WebDashKeySubcommand implements WebDashSubcommand {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-off") + String.format(openSuffix, link);
                 ChatUtil.sendClickableMessage(sender, message, link);
+
+                // notify
+                NotificationHandler.notifyKeyOff();
             } else {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-already-off") + String.format(openSuffix, link);
@@ -55,6 +62,10 @@ public class WebDashKeySubcommand implements WebDashSubcommand {
                 String message = MessagesConfig.get("key-reset-off") + String.format(openSuffix, link);
                 ChatUtil.sendClickableMessage(sender, message, link);
             }
+
+            // notify
+            NotificationHandler.notifyKeyReset();
+
             return;
         }
         sender.sendMessage(MessagesConfig.get("key-help"));

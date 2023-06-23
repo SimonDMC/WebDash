@@ -2,6 +2,7 @@ package com.simondmc.webdash.command.subcommands;
 
 import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
+import com.simondmc.webdash.data.NotificationHandler;
 import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.command.CommandSender;
@@ -17,6 +18,9 @@ public class WebDashOffSubcommand implements WebDashSubcommand {
         }
         if (StatusHandler.disable()) {
             sender.sendMessage(MessagesConfig.get("off-success"));
+
+            // notify
+            NotificationHandler.notifyOff();
         } else {
             sender.sendMessage(MessagesConfig.get("off-already-off"));
         }

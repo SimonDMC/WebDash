@@ -18,7 +18,7 @@ public class WebDashTabCompleter implements TabCompleter {
 
         // base command
         if (args.length == 1) {
-            List<String> list = Arrays.asList("add", "remove", "list", "link", "restart", "key", "on", "off", "help", "info");
+            List<String> list = Arrays.asList("add", "remove", "list", "link", "restart", "key", "on", "off", "help", "info", "notify");
             List<String> arguments = new ArrayList<>(list);
             // remove current on/off setting
             if (StatusHandler.isEnabled()) {

@@ -2,6 +2,7 @@ package com.simondmc.webdash.command.subcommands;
 
 import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
+import com.simondmc.webdash.data.NotificationHandler;
 import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.server.WebServer;
 import com.simondmc.webdash.util.ChatUtil;
@@ -24,6 +25,9 @@ public class WebDashOnSubcommand implements WebDashSubcommand {
             String link = WebServer.getLink();
             String message = MessagesConfig.get("on-success") + String.format(openSuffix, link);
             ChatUtil.sendClickableMessage(sender, message, link);
+
+            // notify
+            NotificationHandler.notifyOn();
         } else {
             String link = WebServer.getLink();
             String message = MessagesConfig.get("on-already-on") + String.format(openSuffix, link);
