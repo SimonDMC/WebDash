@@ -27,7 +27,7 @@ public class WebDashOnSubcommand implements WebDashSubcommand {
             ChatUtil.sendClickableMessage(sender, message, link);
 
             // notify
-            NotificationHandler.notifyOn();
+            NotificationHandler.notifyOn(sender);
         } else {
             String link = WebServer.getLink();
             String message = MessagesConfig.get("on-already-on") + String.format(openSuffix, link);

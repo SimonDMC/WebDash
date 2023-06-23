@@ -20,7 +20,7 @@ public class WebDashOffSubcommand implements WebDashSubcommand {
             sender.sendMessage(MessagesConfig.get("off-success"));
 
             // notify
-            NotificationHandler.notifyOff();
+            NotificationHandler.notifyOff(sender);
         } else {
             sender.sendMessage(MessagesConfig.get("off-already-off"));
         }

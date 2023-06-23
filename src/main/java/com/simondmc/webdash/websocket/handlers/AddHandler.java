@@ -1,5 +1,6 @@
 package com.simondmc.webdash.websocket.handlers;
 
+import com.simondmc.webdash.data.NotificationHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import com.simondmc.webdash.websocket.generic.SpecificIncomingSocketHandler;
@@ -14,6 +15,10 @@ public class AddHandler implements SpecificIncomingSocketHandler {
         String color = message.split("§§§")[2];
 
         // add route
-        RouteHandler.addRoute(new Route(name, command, color));
+        Route route = new Route(name, command, color);
+        RouteHandler.addRoute(route);
+
+        // notify
+        NotificationHandler.notifyRouteAdd(route, null);
     }
 }

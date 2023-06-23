@@ -1,7 +1,6 @@
 package com.simondmc.webdash.route;
 
 import com.simondmc.webdash.config.RoutesConfig;
-import com.simondmc.webdash.data.NotificationHandler;
 import com.simondmc.webdash.websocket.WSSHandler;
 
 import java.util.ArrayList;
@@ -17,9 +16,6 @@ public class RouteHandler {
 
         // broadcast changes
         WSSHandler.send(RouteHandler.getJSON());
-
-        // notify
-        NotificationHandler.notifyRouteAdd(route);
     }
 
     public static List<Route> getRoutes() {
@@ -66,9 +62,6 @@ public class RouteHandler {
 
         // broadcast changes
         WSSHandler.send(RouteHandler.getJSON());
-
-        // notify
-        NotificationHandler.notifyRouteRemove(route);
 
         return true;
     }

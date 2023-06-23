@@ -29,7 +29,7 @@ public class WebDashKeySubcommand implements WebDashSubcommand {
                 ChatUtil.sendClickableMessage(sender, message, link);
 
                 // notify
-                NotificationHandler.notifyKeyOn();
+                NotificationHandler.notifyKeyOn(sender);
             } else {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-already-on") + String.format(openSuffix, link);
@@ -44,7 +44,7 @@ public class WebDashKeySubcommand implements WebDashSubcommand {
                 ChatUtil.sendClickableMessage(sender, message, link);
 
                 // notify
-                NotificationHandler.notifyKeyOff();
+                NotificationHandler.notifyKeyOff(sender);
             } else {
                 String link = WebServer.getLink();
                 String message = MessagesConfig.get("key-already-off") + String.format(openSuffix, link);
@@ -64,7 +64,7 @@ public class WebDashKeySubcommand implements WebDashSubcommand {
             }
 
             // notify
-            NotificationHandler.notifyKeyReset();
+            NotificationHandler.notifyKeyReset(sender);
 
             return;
         }
