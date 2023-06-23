@@ -29,9 +29,9 @@ public class WebDashNotifySubcommand implements WebDashSubcommand {
         }
 
         if (NotificationHandler.toggleNotification(s)) {
-            sender.sendMessage(MessagesConfig.get("notify-success-on"));
+            s.sendMessage(MessagesConfig.get("notify-success-on"));
         } else {
-            sender.sendMessage(MessagesConfig.get("notify-success-off"));
+            s.sendMessage(MessagesConfig.get("notify-success-off"));
         }
     }
 }
