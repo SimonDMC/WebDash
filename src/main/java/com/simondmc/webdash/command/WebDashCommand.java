@@ -29,6 +29,7 @@ public class WebDashCommand implements CommandExecutor {
                 case "off", "disable" -> executor = new WebDashOffSubcommand();
                 case "help" -> executor = new WebDashHelpSubcommand();
                 case "info" -> executor = new WebDashInfoSubcommand();
+                case "notify" -> executor = new WebDashNotifySubcommand();
                 default -> {
                     return false;
                 }

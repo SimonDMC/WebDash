@@ -57,7 +57,7 @@ public final class WebDash extends JavaPlugin {
         // routes.yml stores buttons/routes added by players
         RoutesConfig.init();
 
-        // data.yml stores key data and on/off status
+        // data.yml stores key data, on/off status and players to notify
         DataConfig.init();
 
         // messages.yml is used as a language file

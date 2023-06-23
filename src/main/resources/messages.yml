@@ -5,20 +5,26 @@
 
 add-help: "§cUsage: /webdash add <name> /<command>"
 add-success: "§aAdded button §e%s§a with command §b/%s§a."
+
 remove-help: "§cUsage: /webdash remove <id>"
 remove-success: "§aRemoved button §e%s§a."
 remove-fail: "§cButton with id §e%s§c does not exist."
+
 list-empty: "§cNo buttons have been added yet, use §e/webdash add <name> /<command>§c to add one."
 list-header: "§aButtons:"
 list-item: "§e%s§a: §b/%s"
 link-success: "§aDashboard Link: §e%s"
 link-key-suffix: " §7(key is in the clickable link)"
+
 restart-success: "§aServers restarted successfully at §e%s§a."
 restart-fail: "§cServers failed to start. Check the console for more information."
+
 on-success: "§eWebDash is now §a§lenabled§e."
 on-already-on: "§eWebDash is already enabled."
+
 off-success: "§eWebDash is now §c§ldisabled§e."
 off-already-off: "§eWebDash is already disabled."
+
 key-help: "§cUsage: /webdash key <on/off/reset>"
 key-on: "§eDashboard key protection is now §a§lON§e."
 key-already-on: "§eDashboard key protection is already on."
@@ -26,6 +32,10 @@ key-off: "§eDashboard key protection is now §c§lOFF§e."
 key-already-off: "§eDashboard key protection is already off."
 key-reset: "§eThe dashboard key has been reset."
 key-reset-off: "§eThe dashboard key has been reset §7(though key protection is currently disabled)§e. Open the dashboard by clicking §b§nhere§e."
+
+notify-success-on: "§eWebDash notifications are now §a§lenabled§e."
+notify-success-off: "§eWebDash notifications are now §c§ldisabled§e."
+notify-fail-player-not-found: "§cPlayer §e%s§c not found."
 
 not-running: "§cServer is not running. Run §e/webdash restart§c and check the console to see what went wrong."
 player-open: " Open it by clicking §b§nhere§e."

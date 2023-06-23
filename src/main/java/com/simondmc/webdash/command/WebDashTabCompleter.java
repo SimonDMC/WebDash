@@ -1,7 +1,7 @@
 package com.simondmc.webdash.command;
 
-import com.simondmc.webdash.dashboard.KeyHandler;
-import com.simondmc.webdash.dashboard.StatusHandler;
+import com.simondmc.webdash.data.KeyHandler;
+import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
 import org.bukkit.command.Command;

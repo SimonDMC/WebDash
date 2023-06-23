@@ -1,4 +1,4 @@
-package com.simondmc.webdash.dashboard;
+package com.simondmc.webdash.data;
 
 import com.simondmc.webdash.WebDash;
 import com.simondmc.webdash.config.Configs;

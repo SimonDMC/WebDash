@@ -1,7 +1,7 @@
 package com.simondmc.webdash.websocket.handlers;
 
-import com.simondmc.webdash.dashboard.KeyHandler;
-import com.simondmc.webdash.dashboard.StatusHandler;
+import com.simondmc.webdash.data.KeyHandler;
+import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.websocket.WSSHandler;
 import com.simondmc.webdash.websocket.generic.SpecificIncomingSocketHandler;
 import org.java_websocket.WebSocket;

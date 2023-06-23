@@ -1,5 +1,6 @@
 {
     "name": "WebDash",
+    "description": "A Web Dashboard for your Minecraft server",
     "icons": [
         {
             "src": "favicon.ico",

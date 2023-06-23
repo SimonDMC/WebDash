@@ -1,8 +1,8 @@
 package com.simondmc.webdash.server;
 
 import com.simondmc.webdash.WebDash;
-import com.simondmc.webdash.dashboard.KeyHandler;
-import com.simondmc.webdash.dashboard.StatusHandler;
+import com.simondmc.webdash.data.KeyHandler;
+import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.websocket.WSSHandler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

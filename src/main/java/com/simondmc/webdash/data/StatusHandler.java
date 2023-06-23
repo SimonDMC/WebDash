@@ -1,4 +1,4 @@
-package com.simondmc.webdash.dashboard;
+package com.simondmc.webdash.data;
 
 import com.simondmc.webdash.config.DataConfig;
 import com.simondmc.webdash.websocket.WSSHandler;

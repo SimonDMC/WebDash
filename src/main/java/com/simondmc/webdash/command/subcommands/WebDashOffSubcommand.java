@@ -2,7 +2,7 @@ package com.simondmc.webdash.command.subcommands;
 
 import com.simondmc.webdash.command.WebDashSubcommand;
 import com.simondmc.webdash.config.MessagesConfig;
-import com.simondmc.webdash.dashboard.StatusHandler;
+import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.server.WebServer;
 import org.bukkit.command.CommandSender;
 

@@ -1,8 +1,8 @@
 package com.simondmc.webdash.command.subcommands;
 
 import com.simondmc.webdash.command.WebDashSubcommand;
-import com.simondmc.webdash.dashboard.KeyHandler;
-import com.simondmc.webdash.dashboard.StatusHandler;
+import com.simondmc.webdash.data.KeyHandler;
+import com.simondmc.webdash.data.StatusHandler;
 import com.simondmc.webdash.util.ChatUtil;
 import org.bukkit.command.CommandSender;
 
