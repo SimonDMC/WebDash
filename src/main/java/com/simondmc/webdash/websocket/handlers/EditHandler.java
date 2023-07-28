@@ -1,5 +1,6 @@
 package com.simondmc.webdash.websocket.handlers;
 
+import com.simondmc.webdash.config.RoutesConfig;
 import com.simondmc.webdash.data.NotificationHandler;
 import com.simondmc.webdash.route.Route;
 import com.simondmc.webdash.route.RouteHandler;
@@ -23,6 +24,9 @@ public class EditHandler implements SpecificIncomingSocketHandler {
         route.setName(name);
         route.setCommand(command);
         route.setColor(color);
+
+        // save routes
+        RoutesConfig.saveRoutes();
 
         // broadcast changes
         WSSHandler.send(RouteHandler.getJSON());
