@@ -6,6 +6,7 @@
 ## Demo
 
 https://github.com/SimonDMC/WebDash/assets/46278840/a5289338-5a3a-4117-b5c7-b1ab44c8fc3f
+
 (In case the video above doesn't work, the demo
 can also be found [here](https://youtu.be/Zq_1JqmAYXU).)
 
